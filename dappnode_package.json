@@ -9,7 +9,7 @@
 		"hash": "/ipfs/Qmf2TmqcKk3stw1zt6wzkDW5UrKTCgXNx3k2m5ftr3dip2",
 		"size": 19346978,
 		"volumes": [
-			"/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
+			"/opt/dappnode/DNCORE/:/opt/app/DNCORE/",
 			"/var/run/docker.sock:/var/run/docker.sock"
 		],
 		"subnet": "172.33.0.0/16",
