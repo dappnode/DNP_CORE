@@ -13,6 +13,6 @@ services:
         image: core.dnp.dappnode.eth:0.1.3
         container_name: DAppNodeCore-core.dnp.dappnode.eth
         volumes:
-            - /usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/
+            - /opt/dappnode/DNCORE/:/opt/app/DNCORE/
             - /var/run/docker.sock:/var/run/docker.sock
         dns: 172.33.1.2

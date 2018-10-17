@@ -3,13 +3,13 @@ FROM alpine as build
 RUN apk add --update --no-cache \
     docker
 
-WORKDIR /usr/src/app
+WORKDIR /opt/app
 
 FROM alpine
 
 ENV DOCKER_COMPOSE_VERSION 1.22.0
 
-WORKDIR /usr/src/app
+WORKDIR /opt/app
 
 COPY --from=build /usr/bin/docker /usr/bin/docker
 
@@ -51,4 +51,4 @@ ENV COMPOSE_IGNORE_ORPHANS true
 
 COPY entrypoint.sh .
 
-ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
+ENTRYPOINT [ "/opt/app/entrypoint.sh" ]
