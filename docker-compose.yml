@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+    core.dnp.dappnode.eth:
+        image: 'core.dnp.dappnode.eth:0.1.6'
+        build: ./build
+        volumes:
+            - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
+            - '/var/run/docker.sock:/var/run/docker.sock'
