@@ -1,8 +1,18 @@
 version: '3.4'
+
+networks:
+    network:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.33.0.0/16
+
 services:
     core.dnp.dappnode.eth:
-        image: 'core.dnp.dappnode.eth:0.1.10'
         build: ./build
+        image: core.dnp.dappnode.eth:0.1.4
+        container_name: DAppNodeCore-core.dnp.dappnode.eth
         volumes:
-            - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
-            - '/var/run/docker.sock:/var/run/docker.sock'
+            - /usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/
+            - /var/run/docker.sock:/var/run/docker.sock
+        dns: 172.33.1.2
