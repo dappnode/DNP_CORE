@@ -10,7 +10,7 @@ jobs:
       services:
         - docker
       script:
-        - docker-compose -f build
+        - docker-compose build
 
     # Deploy stage, all code below is common between DAppNode packages
     ##################################################################
