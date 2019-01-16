@@ -32,7 +32,7 @@ jobs:
         - dappnodesdk publish patch -p infura
       node_js: lts/*
       before_deploy:
-        - wget https://raw.githubusercontent.com/dappnode/DAppNode/master/scripts/before_deploy_no_publish.sh
+        - wget https://raw.githubusercontent.com/dappnode/DAppNode/master/scripts/before_deploy.sh
         - source before_deploy.sh
       deploy:
         provider: releases
