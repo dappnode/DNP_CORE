@@ -9,9 +9,12 @@ networks:
 services:
     core.dnp.dappnode.eth:
         build: ./build
-        image: 'core.dnp.dappnode.eth:0.1.12'
+        image: 'core.dnp.dappnode.eth:0.1.14'
         container_name: DAppNodeCore-core.dnp.dappnode.eth
         volumes:
             - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
             - '/var/run/docker.sock:/var/run/docker.sock'
         dns: 172.33.1.2
+        networks:
+            network:
+                ipv4_address: 172.33.1.11
