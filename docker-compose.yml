@@ -15,3 +15,6 @@ services:
             - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
             - '/var/run/docker.sock:/var/run/docker.sock'
         dns: 172.33.1.2
+        networks:
+            network:
+                ipv4_address: 172.33.1.11

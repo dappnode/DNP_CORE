@@ -13,7 +13,7 @@
       "/var/run/docker.sock:/var/run/docker.sock"
     ],
     "subnet": "172.33.0.0/16",
-    "ipv4_address": "172.33.1.10"
+    "ipv4_address": "172.33.1.11"
   },
   "author": "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)",
   "keywords": [
