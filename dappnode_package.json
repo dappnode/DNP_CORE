@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Dappnode package responsible for manage the core packages",
   "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
   "type": "dncore",
