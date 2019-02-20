@@ -24,3 +24,6 @@ if [ -n "`grep \"restart: always\" /usr/src/app/DNCORE/docker-compose-core.yml`"
     sed -i 's/restart: always//g' /usr/src/app/DNCORE/docker-compose-core.yml 
     docker-compose -f /usr/src/app/DNCORE/docker-compose-core.yml up -d
 fi
+
+# Upgrade from 0.1.x to 0.2.0, to be removed.
+grep -qF 'alias dappnode_get=' /usr/src/app/DNCORE/.dappnode_profile || sed  -i "/alias dappnode_start/a alias dappnode_get='docker exec -t DAppNodeCore-vpn.dnp.dappnode.eth vpncli get'"
