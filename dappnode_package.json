@@ -5,9 +5,9 @@
   "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
   "type": "dncore",
   "image": {
-    "path": "",
-    "hash": "",
-    "size": "",
+    "path": "core.dnp.dappnode.eth_0.1.20.tar.xz",
+    "hash": "/ipfs/QmWBz969fDVhNZ2uZdkhPdwBbe4X1m5RUtpxUoq3Z6yF67",
+    "size": 27628442,
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
@@ -37,7 +37,7 @@
     "ethforward.dnp.dappnode.eth": "0.1.5",
     "vpn.dnp.dappnode.eth": "0.1.21",
     "wamp.dnp.dappnode.eth": "0.1.1",
-    "admin.dnp.dappnode.eth": "0.1.16",
+    "admin.dnp.dappnode.eth": "0.1.17",
     "dappmanager.dnp.dappnode.eth": "0.1.21",
     "wifi.dnp.dappnode.eth": "0.1.0"
   }
