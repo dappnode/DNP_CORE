@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.1.21",
+  "version": "0.2.0",
   "description": "Dappnode package responsible for manage the core packages",
   "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
   "type": "dncore",
@@ -15,11 +15,12 @@
     "subnet": "172.33.0.0/16",
     "ipv4_address": "172.33.1.11"
   },
-  "author": "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)",
-  "keywords": [
-    "DAppNodeCore"
+  "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
+  "contributors": [
+    "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "homepage": {
+  "keywords": ["DAppNodeCore"],
+  "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
   "repository": {
@@ -31,14 +32,14 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "bind.dnp.dappnode.eth": "0.1.6",
-    "ipfs.dnp.dappnode.eth": "0.1.5",
-    "ethchain.dnp.dappnode.eth": "0.1.15",
-    "ethforward.dnp.dappnode.eth": "0.1.5",
-    "vpn.dnp.dappnode.eth": "0.1.22",
-    "wamp.dnp.dappnode.eth": "0.1.1",
-    "admin.dnp.dappnode.eth": "0.1.18",
-    "dappmanager.dnp.dappnode.eth": "0.1.22",
-    "wifi.dnp.dappnode.eth": "0.1.0"
+    "bind.dnp.dappnode.eth": "/ipfs/QmV4FbVtWJspi6VuAC6KKU1SxBRTudD6gHkS6iJ8xFyrnC",
+    "ipfs.dnp.dappnode.eth": "/ipfs/QmXs5eNG24DRcny4U6jbx4KTDzJAJ8jrXoZJZZAEetdYTo",
+    "ethchain.dnp.dappnode.eth": "/ipfs/QmWSg9aFiDgPKAKZqFFJTErtgmFoV9wWceaWRALa4gzSD9",
+    "ethforward.dnp.dappnode.eth": "/ipfs/QmPhWia429Vgev1jhiQA1KAuwkJtwph4rF6Kqgd3baJZZ8",
+    "vpn.dnp.dappnode.eth": "/ipfs/QmPypLCazzeLtVMTnZnHjwFc9pgnzuwvxsN4M86zmoni46",
+    "wamp.dnp.dappnode.eth": "/ipfs/QmeUBZsHYfPM2HDzUYH2MhMKVJomshxQQaupL73Naj2Xn6",
+    "admin.dnp.dappnode.eth": "/ipfs/Qmdc2ZTGGB179pgaw3MsyndBGy72wgkL9GHV15nzKHkFts",
+    "dappmanager.dnp.dappnode.eth": "/ipfs/QmUMdjfz9nRhPRjnaKXsC24XuwQvtDF8Uv2taKbCC3PzCE",
+    "wifi.dnp.dappnode.eth": "/ipfs/QmdyfXWSaWbVNt1Gn6XVHkrJeKK9XPvQvTcTWwGUdG9nPU"
   }
 }
