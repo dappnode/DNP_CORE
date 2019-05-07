@@ -1,13 +1,13 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.1.21",
-  "description": "Dappnode package responsible for manage the core packages",
+  "version": "0.2.0",
+  "description": "DAppNode package responsible for manage the core packages",
   "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
   "type": "dncore",
   "image": {
-    "path": "",
-    "hash": "",
-    "size": "",
+    "path": "core.dnp.dappnode.eth_0.2.0.tar.xz",
+    "hash": "/ipfs/QmQVPKvoEmwz24edEzygfk7fPwg85SRwfBYGJT4uFzBRbV",
+    "size": 27793690,
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
@@ -15,11 +15,14 @@
     "subnet": "172.33.0.0/16",
     "ipv4_address": "172.33.1.11"
   },
-  "author": "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)",
+  "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
+  "contributors": [
+    "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
+  ],
   "keywords": [
     "DAppNodeCore"
   ],
-  "homepage": {
+  "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
   "repository": {
@@ -31,14 +34,18 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "bind.dnp.dappnode.eth": "0.1.6",
-    "ipfs.dnp.dappnode.eth": "0.1.5",
-    "ethchain.dnp.dappnode.eth": "0.1.15",
-    "ethforward.dnp.dappnode.eth": "0.1.5",
-    "vpn.dnp.dappnode.eth": "0.1.22",
-    "wamp.dnp.dappnode.eth": "0.1.1",
-    "admin.dnp.dappnode.eth": "0.1.18",
-    "dappmanager.dnp.dappnode.eth": "0.1.22",
-    "wifi.dnp.dappnode.eth": "0.1.0"
+    "bind.dnp.dappnode.eth": "0.2.0",
+    "ipfs.dnp.dappnode.eth": "0.2.0",
+    "ethchain.dnp.dappnode.eth": "0.2.0",
+    "ethforward.dnp.dappnode.eth": "0.2.0",
+    "vpn.dnp.dappnode.eth": "0.2.0",
+    "wamp.dnp.dappnode.eth": "0.2.0",
+    "admin.dnp.dappnode.eth": "0.2.0",
+    "dappmanager.dnp.dappnode.eth": "0.2.0",
+    "wifi.dnp.dappnode.eth": "0.2.0"
+  },
+  "changelog": "**IMPORTANT!** This is a major update to OpenVPN: This update breaks compatibility with the last VPN version. Please read the migration guide at: https://migration020.dappnode.io",
+  "warnings": {
+    "onInstall": "NOTE that the bottom right message updating the progress of the installation will never resolve. After the update you can still connect via WIFI if you have a physical DAppNode, and get your new VPN credentials from the devices section."
   }
 }
