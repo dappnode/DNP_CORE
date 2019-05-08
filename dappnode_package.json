@@ -1,13 +1,13 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "DAppNode package responsible for manage the core packages",
   "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
   "type": "dncore",
   "image": {
-    "path": "core.dnp.dappnode.eth_0.2.0.tar.xz",
-    "hash": "/ipfs/QmQVPKvoEmwz24edEzygfk7fPwg85SRwfBYGJT4uFzBRbV",
-    "size": 27793690,
+    "path": "",
+    "hash": "",
+    "size": "",
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
