@@ -41,7 +41,7 @@
     "vpn.dnp.dappnode.eth": "0.2.0",
     "wamp.dnp.dappnode.eth": "0.2.0",
     "admin.dnp.dappnode.eth": "0.2.0",
-    "dappmanager.dnp.dappnode.eth": "0.2.0",
+    "dappmanager.dnp.dappnode.eth": "0.2.1",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "**IMPORTANT!** This is a major update to OpenVPN: This update breaks compatibility with the last VPN version. Please read the migration guide at: https://migration020.dappnode.io",
