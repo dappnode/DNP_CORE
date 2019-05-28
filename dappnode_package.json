@@ -39,7 +39,7 @@
     "vpn.dnp.dappnode.eth": "0.2.0",
     "wamp.dnp.dappnode.eth": "0.2.0",
     "admin.dnp.dappnode.eth": "0.2.2",
-    "dappmanager.dnp.dappnode.eth": "0.2.2",
+    "dappmanager.dnp.dappnode.eth": "0.2.3",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
