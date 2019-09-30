@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 FROM alpine
 
-ENV DOCKER_COMPOSE_VERSION 1.22.0
+ENV DOCKER_COMPOSE_VERSION 1.24.1
 
 WORKDIR /usr/src/app
 
@@ -50,5 +50,6 @@ RUN wget https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VER
 ENV COMPOSE_IGNORE_ORPHANS true
 
 COPY entrypoint.sh .
+COPY upgrade_*.sh .
 
 ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]

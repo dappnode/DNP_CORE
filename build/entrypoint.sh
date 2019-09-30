@@ -25,7 +25,7 @@ if [ -n "`grep \"restart: always\" /usr/src/app/DNCORE/docker-compose-core.yml`"
     docker-compose -f /usr/src/app/DNCORE/docker-compose-core.yml up -d
 fi
 
-# Upgrade from 0.1.x to 0.2.0, to be removed.
-grep -qF 'alias dappnode_get=' /usr/src/app/DNCORE/.dappnode_profile || sed  -i "/alias dappnode_start/a alias dappnode_get='docker exec -t DAppNodeCore-vpn.dnp.dappnode.eth vpncli get'" /usr/src/app/DNCORE/.dappnode_profile
-grep -qF 'IPSec' /usr/src/app/DNCORE/.dappnode_profile && sed  -i "s,L2TP/IPSec,OpenVPN," /usr/src/app/DNCORE/.dappnode_profile
-grep -qF 'my\.admin\.dnp\.dappnode\.eth' /usr/src/app/DNCORE/.dappnode_profile && sed  -i "s/my\.admin\.dnp\.dappnode\.eth/my\.dappnode/" /usr/src/app/DNCORE/.dappnode_profile
+# Apply all upgrades
+for filename in ./upgrade_*.sh; do
+    sh "${filename}"
+done
