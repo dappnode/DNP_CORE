@@ -1,8 +1,8 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "DAppNode package responsible for manage the core packages",
-  "avatar": "/ipfs/QmQWed5zepncXHvDHt5dZipjVcU7vyydxHmVJV5MF6Wwhr",
+  "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
   "image": {
     "path": "",
@@ -41,7 +41,7 @@
     "vpn.dnp.dappnode.eth": "0.2.1",
     "wamp.dnp.dappnode.eth": "0.2.0",
     "admin.dnp.dappnode.eth": "0.2.8",
-    "dappmanager.dnp.dappnode.eth": "0.2.11",
+    "dappmanager.dnp.dappnode.eth": "0.2.12",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
