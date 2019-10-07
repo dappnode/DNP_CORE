@@ -8,7 +8,7 @@ networks:
 services:
   core.dnp.dappnode.eth:
     build: ./build
-    image: 'core.dnp.dappnode.eth:0.2.12'
+    image: 'core.dnp.dappnode.eth:0.2.14'
     container_name: DAppNodeCore-core.dnp.dappnode.eth
     volumes:
       - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
