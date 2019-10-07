@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "DAppNode package responsible for manage the core packages",
   "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
@@ -36,8 +36,8 @@
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.0",
     "ipfs.dnp.dappnode.eth": "0.2.4",
-    "ethchain.dnp.dappnode.eth": "0.2.9",
-    "ethforward.dnp.dappnode.eth": "0.2.2",
+    "ethchain.dnp.dappnode.eth": "0.2.11",
+    "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.1",
     "wamp.dnp.dappnode.eth": "0.2.0",
     "admin.dnp.dappnode.eth": "0.2.8",
