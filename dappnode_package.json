@@ -38,10 +38,10 @@
     "ipfs.dnp.dappnode.eth": "0.2.4",
     "ethchain.dnp.dappnode.eth": "0.2.12",
     "ethforward.dnp.dappnode.eth": "0.2.3",
-    "vpn.dnp.dappnode.eth": "0.2.1",
+    "vpn.dnp.dappnode.eth": "0.2.3",
     "wamp.dnp.dappnode.eth": "0.2.0",
-    "admin.dnp.dappnode.eth": "0.2.8",
-    "dappmanager.dnp.dappnode.eth": "0.2.14",
+    "admin.dnp.dappnode.eth": "0.2.9",
+    "dappmanager.dnp.dappnode.eth": "0.2.16",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
