@@ -50,6 +50,6 @@ RUN wget https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VER
 ENV COMPOSE_IGNORE_ORPHANS true
 
 COPY entrypoint.sh .
-COPY upgrade_*.sh .
+COPY upgrade_*.sh ./
 
 ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
