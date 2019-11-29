@@ -26,6 +26,10 @@ if [ -n "`grep \"restart: always\" /usr/src/app/DNCORE/docker-compose-core.yml`"
 fi
 
 # Apply all upgrades
-for filename in ./upgrade_*.sh; do
+for filename in ./upgrades/upgrade_*.sh; do
     sh "${filename}"
 done
+
+# Copy host scripts
+mkdir -p /usr/src/app/DNCORE/scripts
+cp -r ./scripts/* /usr/src/app/DNCORE/scripts
