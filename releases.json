@@ -30,5 +30,13 @@
       "dappnode": "Thu, 21 Nov 2019 01:36:04 GMT"
     },
     "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.20&h=%2Fipfs%2FQmWuFY65D4JmQnvDmchZML3VRbBn3s3ERDjgGWsoT2m8Kx"
+  },
+  "0.2.21": {
+    "hash": "/ipfs/QmUauENjpNqzJ97uBdbtGw9QDZysXMXxJo35H7gvH5apNj",
+    "type": "manifest",
+    "uploadedTo": {
+      "dappnode": "Wed, 04 Dec 2019 21:51:39 GMT"
+    },
+    "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.21&h=%2Fipfs%2FQmUauENjpNqzJ97uBdbtGw9QDZysXMXxJo35H7gvH5apNj"
   }
 }

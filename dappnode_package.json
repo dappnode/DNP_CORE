@@ -36,7 +36,7 @@
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.1",
     "ipfs.dnp.dappnode.eth": "0.2.4",
-    "ethchain.dnp.dappnode.eth": "0.2.15",
+    "ethchain.dnp.dappnode.eth": "0.2.16",
     "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.4",
     "wamp.dnp.dappnode.eth": "0.2.0",
