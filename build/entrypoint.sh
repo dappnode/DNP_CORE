@@ -31,5 +31,6 @@ cp -r ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
+    echo "Applying upgrade ${filename}..."
     sh "${filename}"
 done
