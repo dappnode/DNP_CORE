@@ -8,6 +8,7 @@
     "path": "",
     "hash": "",
     "size": "",
+    "restart": "on-failure:5",
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
@@ -19,9 +20,7 @@
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": [
-    "DAppNodeCore"
-  ],
+  "keywords": ["DAppNodeCore"],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
