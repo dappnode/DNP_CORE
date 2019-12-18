@@ -20,9 +20,11 @@ docker-compose -f /usr/src/app/DNCORE/docker-compose-dappmanager.yml up -d
 docker-compose -f /usr/src/app/DNCORE/docker-compose-admin.yml up -d
 docker-compose -f /usr/src/app/DNCORE/docker-compose-wifi.yml up -d
 
-# Copy host scripts
+# Copy host scripts and packages
 mkdir -p /usr/src/app/DNCORE/scripts/upgrade
-cp -r ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
+cp -rf ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
+chmod +x /usr/src/app/DNCORE/scripts/upgrade/*.sh
+cp -fr ./deb /usr/src/app/DNCORE/scripts/upgrade/
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
