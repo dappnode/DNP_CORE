@@ -5,9 +5,10 @@
   "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
   "image": {
-    "path": "",
-    "hash": "",
-    "size": "",
+    "path": "core.dnp.dappnode.eth_0.2.23.tar.xz",
+    "hash": "/ipfs/QmXdFvjRMcQxMWJK7jwwAN5XFDv8UQWXeE37QJxfiFKTGn",
+    "size": 32878952,
+    "restart": "on-failure",
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
@@ -19,9 +20,7 @@
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": [
-    "DAppNodeCore"
-  ],
+  "keywords": ["DAppNodeCore"],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
@@ -40,8 +39,8 @@
     "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.4",
     "wamp.dnp.dappnode.eth": "0.2.0",
-    "admin.dnp.dappnode.eth": "0.2.11",
-    "dappmanager.dnp.dappnode.eth": "0.2.22",
+    "admin.dnp.dappnode.eth": "0.2.12",
+    "dappmanager.dnp.dappnode.eth": "0.2.23",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
