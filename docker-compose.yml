@@ -1,4 +1,4 @@
-version: "3.4"
+version: '3.4'
 networks:
   network:
     driver: bridge
@@ -8,12 +8,12 @@ networks:
 services:
   core.dnp.dappnode.eth:
     build: ./build
-    restart: "on-failure"
+    restart: 'no'
     image: 'core.dnp.dappnode.eth:0.2.24'
     container_name: DAppNodeCore-core.dnp.dappnode.eth
     volumes:
-      - "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - '/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/'
+      - '/var/run/docker.sock:/var/run/docker.sock'
     dns: 172.33.1.2
     networks:
       network:

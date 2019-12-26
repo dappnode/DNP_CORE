@@ -5,9 +5,9 @@
   "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
   "image": {
-    "path": "core.dnp.dappnode.eth_0.2.23.tar.xz",
-    "hash": "/ipfs/QmXdFvjRMcQxMWJK7jwwAN5XFDv8UQWXeE37QJxfiFKTGn",
-    "size": 32878952,
+    "path": "core.dnp.dappnode.eth_0.2.24.tar.xz",
+    "hash": "/ipfs/QmQj43An9HkfYoEDTB5ZzoVqq3f55i6qnx26d8NSppfbWZ",
+    "size": 32877428,
     "restart": "on-failure",
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
@@ -20,7 +20,9 @@
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": ["DAppNodeCore"],
+  "keywords": [
+    "DAppNodeCore"
+  ],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
