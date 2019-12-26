@@ -38,5 +38,12 @@
       "dappnode": "Wed, 04 Dec 2019 21:51:39 GMT"
     },
     "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.21&h=%2Fipfs%2FQmUauENjpNqzJ97uBdbtGw9QDZysXMXxJo35H7gvH5apNj"
+  },
+  "0.2.24": {
+    "hash": "/ipfs/QmaKc1DwTuQUY1p2s51o1fyRohmKmwc7HSeGYS4MPMemTQ",
+    "type": "manifest",
+    "uploadedTo": {
+      "dappnode": "Thu, 26 Dec 2019 18:45:04 GMT"
+    }
   }
 }

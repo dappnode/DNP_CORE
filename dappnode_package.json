@@ -1,13 +1,14 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "description": "DAppNode package responsible for manage the core packages",
   "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
   "image": {
-    "path": "",
-    "hash": "",
-    "size": "",
+    "path": "core.dnp.dappnode.eth_0.2.24.tar.xz",
+    "hash": "/ipfs/QmQj43An9HkfYoEDTB5ZzoVqq3f55i6qnx26d8NSppfbWZ",
+    "size": 32877428,
+    "restart": "on-failure",
     "volumes": [
       "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
       "/var/run/docker.sock:/var/run/docker.sock"
@@ -40,8 +41,8 @@
     "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.4",
     "wamp.dnp.dappnode.eth": "0.2.0",
-    "admin.dnp.dappnode.eth": "0.2.11",
-    "dappmanager.dnp.dappnode.eth": "0.2.22",
+    "admin.dnp.dappnode.eth": "0.2.12",
+    "dappmanager.dnp.dappnode.eth": "0.2.23",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
