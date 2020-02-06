@@ -41,8 +41,8 @@
     "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.4",
     "wamp.dnp.dappnode.eth": "0.2.0",
-    "admin.dnp.dappnode.eth": "0.2.12",
-    "dappmanager.dnp.dappnode.eth": "0.2.23",
+    "admin.dnp.dappnode.eth": "0.2.13",
+    "dappmanager.dnp.dappnode.eth": "0.2.24",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
   "changelog": "",
