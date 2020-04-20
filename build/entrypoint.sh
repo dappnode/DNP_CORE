@@ -8,6 +8,7 @@ mkdir -p /usr/src/app/DNCORE/scripts/upgrade
 cp -rf ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
 chmod +x /usr/src/app/DNCORE/scripts/upgrade/*.sh
 cp -fr ./deb /usr/src/app/DNCORE/scripts/upgrade/
+cp /usr/src/app/DNCORE/packages-content-hash.csv
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
