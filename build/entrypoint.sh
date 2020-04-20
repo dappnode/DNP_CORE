@@ -1,15 +1,5 @@
 #!/bin/sh
 
-test -f /usr/src/app/DNCORE/bind.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/bind.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ipfs.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ipfs.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ethchain.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ethchain.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ethforward.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ethforward.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/vpn.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/vpn.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/wamp.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/wamp.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/dappmanager.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/dappmanager.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/admin.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/admin.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/wifi.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/wifi.dnp.dappnode.eth.envs
-
 docker-compose -f /usr/src/app/DNCORE/docker-compose-bind.yml up -d
 docker-compose -f /usr/src/app/DNCORE/docker-compose-ipfs.yml up -d
 docker-compose -f /usr/src/app/DNCORE/docker-compose-ethchain.yml up -d
@@ -31,3 +21,5 @@ for filename in ./upgrades/upgrade_*.sh; do
     echo "Applying upgrade ${filename}..."
     sh "${filename}"
 done
+
+sleep 1m
