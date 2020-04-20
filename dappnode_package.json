@@ -1,13 +1,15 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.27",
+  "version": "0.2.28",
   "description": "DAppNode package responsible for manage the core packages",
   "type": "dncore",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": ["DAppNodeCore"],
+  "keywords": [
+    "DAppNodeCore"
+  ],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
