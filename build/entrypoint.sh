@@ -1,14 +1,14 @@
 #!/bin/bash
 STATUS_CHECK_DELAY=1m
 CONTAINER_NAME=DAppNodeCore-dappmanager.dnp.dappnode.eth
-DAPPMANAGER_YML=/usr/src/dappnode/DNCORE/docker-compose-dappmanager.yml 
+DAPPMANAGER_YML=/usr/src/app/DNCORE/docker-compose-dappmanager.yml 
 
 # Copy host scripts and packages
 mkdir -p /usr/src/app/DNCORE/scripts/upgrade
 cp -rf ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
 chmod +x /usr/src/app/DNCORE/scripts/upgrade/*.sh
 cp -fr ./deb /usr/src/app/DNCORE/scripts/upgrade/
-cp /usr/src/app/DNCORE/packages-content-hash.csv
+cp ./packages-content-hash.csv /usr/src/app/DNCORE/packages-content-hash.csv
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
