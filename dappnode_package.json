@@ -2,20 +2,7 @@
   "name": "core.dnp.dappnode.eth",
   "version": "0.2.27",
   "description": "DAppNode package responsible for manage the core packages",
-  "avatar": "/ipfs/QmS4kGwYA8n918xdNUgFt8MCfnsR8pjmzphS59BL7qtLq2",
   "type": "dncore",
-  "image": {
-    "path": "",
-    "hash": "",
-    "size": "",
-    "restart": "on-failure",
-    "volumes": [
-      "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/",
-      "/var/run/docker.sock:/var/run/docker.sock"
-    ],
-    "subnet": "172.33.0.0/16",
-    "ipv4_address": "172.33.1.11"
-  },
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
@@ -37,14 +24,19 @@
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.1",
     "ipfs.dnp.dappnode.eth": "0.2.4",
-    "ethchain.dnp.dappnode.eth": "0.2.18",
+    "ethchain.dnp.dappnode.eth": "0.2.20",
     "ethforward.dnp.dappnode.eth": "0.2.3",
     "vpn.dnp.dappnode.eth": "0.2.4",
     "wamp.dnp.dappnode.eth": "0.2.0",
-    "admin.dnp.dappnode.eth": "0.2.13",
+    "admin.dnp.dappnode.eth": "0.2.15",
     "dappmanager.dnp.dappnode.eth": "0.2.24",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
+  "runOrder": [
+    "vpn.dnp.dappnode.eth",
+    "core.dnp.dappnode.eth",
+    "dappmanager.dnp.dappnode.eth"
+  ],
   "changelog": "",
   "updateAlerts": [],
   "warnings": {
