@@ -47,6 +47,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
 RUN wget https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64 -O /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose
 
+RUN apk -u add bash 
+
 ENV COMPOSE_IGNORE_ORPHANS true
 
 COPY entrypoint.sh .
