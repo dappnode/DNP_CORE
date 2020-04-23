@@ -7,7 +7,9 @@
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": ["DAppNodeCore"],
+  "keywords": [
+    "DAppNodeCore"
+  ],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
@@ -30,6 +32,11 @@
     "dappmanager.dnp.dappnode.eth": "0.2.24",
     "wifi.dnp.dappnode.eth": "0.2.0"
   },
+  "runOrder": [
+    "vpn.dnp.dappnode.eth",
+    "core.dnp.dappnode.eth",
+    "dappmanager.dnp.dappnode.eth"
+  ],
   "changelog": "",
   "updateAlerts": [],
   "warnings": {

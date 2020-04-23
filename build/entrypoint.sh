@@ -1,33 +1,35 @@
-#!/bin/sh
-
-test -f /usr/src/app/DNCORE/bind.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/bind.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ipfs.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ipfs.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ethchain.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ethchain.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/ethforward.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/ethforward.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/vpn.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/vpn.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/wamp.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/wamp.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/dappmanager.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/dappmanager.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/admin.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/admin.dnp.dappnode.eth.env
-test -f /usr/src/app/DNCORE/wifi.dnp.dappnode.eth.env || touch /usr/src/app/DNCORE/wifi.dnp.dappnode.eth.envs
-
-docker-compose -f /usr/src/app/DNCORE/docker-compose-bind.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-ipfs.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-ethchain.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-ethforward.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-vpn.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-wamp.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-dappmanager.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-admin.yml up -d
-docker-compose -f /usr/src/app/DNCORE/docker-compose-wifi.yml up -d
+#!/bin/bash
+STATUS_CHECK_DELAY=1m
+CONTAINER_NAME=DAppNodeCore-dappmanager.dnp.dappnode.eth
+DAPPMANAGER_YML=/usr/src/app/DNCORE/docker-compose-dappmanager.yml 
 
 # Copy host scripts and packages
 mkdir -p /usr/src/app/DNCORE/scripts/upgrade
 cp -rf ./scripts/* /usr/src/app/DNCORE/scripts/upgrade
 chmod +x /usr/src/app/DNCORE/scripts/upgrade/*.sh
 cp -fr ./deb /usr/src/app/DNCORE/scripts/upgrade/
+cp ./packages-content-hash.csv /usr/src/app/DNCORE/packages-content-hash.csv
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
     echo "Applying upgrade ${filename}..."
     sh "${filename}"
 done
+
+sleep $STATUS_CHECK_DELAY
+
+STATUS=$(docker inspect -f '{{.State.Running}}' $CONTAINER_NAME)
+RUNNING_IMAGE=$(docker inspect -f '{{.Config.Image}}' $CONTAINER_NAME)
+YML_IMAGE=$(cat $DAPPMANAGER_YML | awk '/image/{print $2}' | tr -d "'")
+
+if [[ $STATUS != "true" ]]; then
+    docker-compose -f $DAPPMANAGER_YML up -d <&-
+else
+    RUNNING_VERSION=$(echo $RUNNING_IMAGE | awk -F":" '{print $2}')
+    YML_VERSION=$(echo $YML_IMAGE | awk -F":" '{print $2}')
+    if [ "$(printf '%s\n' "$RUNNING_VERSION" "$YML_VERSION" | sort -V | head -n1)" != "$YML_VERSION" ]; then
+            docker-compose -f $DAPPMANAGER_YML up -d <&-
+    fi
+fi
+
+
