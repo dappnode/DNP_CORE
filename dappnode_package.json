@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.27",
+  "version": "0.2.30",
   "description": "DAppNode package responsible for manage the core packages",
   "type": "dncore",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
