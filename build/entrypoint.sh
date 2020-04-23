@@ -21,7 +21,7 @@ sleep $STATUS_CHECK_DELAY
 STATUS=$(docker inspect -f '{{.State.Running}}' $CONTAINER_NAME)
 RUNNING_IMAGE=$(docker inspect -f '{{.Config.Image}}' $CONTAINER_NAME)
 YML_IMAGE=$(cat $DAPPMANAGER_YML | awk '/image/{print $2}' | tr -d "'")
-WORKAROUND_VERSION="0.2.24"
+WORKAROUND_VERSION="0.2.25"
 
 if [[ $STATUS != "true" ]]; then
     echo "Starting the dappmanager due to the DAppNodeCore-core.dnp.dappnode.eth workaround STATUS != true"
