@@ -27,8 +27,8 @@
     "vpn.dnp.dappnode.eth": "0.2.5",
     "wamp.dnp.dappnode.eth": "0.2.2",
     "admin.dnp.dappnode.eth": "0.2.17",
-    "dappmanager.dnp.dappnode.eth": "0.2.25",
-    "wifi.dnp.dappnode.eth": "0.2.2"
+    "dappmanager.dnp.dappnode.eth": "0.2.26",
+    "wifi.dnp.dappnode.eth": "0.2.3"
   },
   "runOrder": [
     "vpn.dnp.dappnode.eth",
