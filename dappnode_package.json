@@ -22,7 +22,7 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "bind.dnp.dappnode.eth": "0.2.2",
+    "bind.dnp.dappnode.eth": "0.2.3",
     "ipfs.dnp.dappnode.eth": "0.2.6",
     "vpn.dnp.dappnode.eth": "0.2.5",
     "wamp.dnp.dappnode.eth": "0.2.2",
