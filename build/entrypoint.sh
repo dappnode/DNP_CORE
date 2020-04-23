@@ -21,15 +21,17 @@ sleep $STATUS_CHECK_DELAY
 STATUS=$(docker inspect -f '{{.State.Running}}' $CONTAINER_NAME)
 RUNNING_IMAGE=$(docker inspect -f '{{.Config.Image}}' $CONTAINER_NAME)
 YML_IMAGE=$(cat $DAPPMANAGER_YML | awk '/image/{print $2}' | tr -d "'")
+WORKAROUND_VERSION="0.2.24"
 
 if [[ $STATUS != "true" ]]; then
+    echo "Starting the dappmanager due to the DAppNodeCore-core.dnp.dappnode.eth workaround STATUS != true"
     docker-compose -f $DAPPMANAGER_YML up -d <&-
-else
+elif [[ $RUNNING_IMAGE != $YML_IMAGE ]];then
     RUNNING_VERSION=$(echo $RUNNING_IMAGE | awk -F":" '{print $2}')
     YML_VERSION=$(echo $YML_IMAGE | awk -F":" '{print $2}')
-    if [ "$(printf '%s\n' "$RUNNING_VERSION" "$YML_VERSION" | sort -V | head -n1)" != "$YML_VERSION" ]; then
+    if [ "$(printf '%s\n' "$RUNNING_VERSION" "$WORKAROUND_VERSION" | sort -V | head -n1)" != "$WORKAROUND_VERSION" ]; then
+            echo "Restarting the dappmanager due to the DAppNodeCore-core.dnp.dappnode.eth workaround" 
+            echo "YML_VERSION=${YML_VERSION} - RUNNING_VERSION=${RUNNING_VERSION}"
             docker-compose -f $DAPPMANAGER_YML up -d <&-
     fi
 fi
-
-
