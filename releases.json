@@ -80,12 +80,11 @@
     "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.31&h=%2Fipfs%2FQmXvACzHZd8kFMmLAWcNNgbMXouGLFmXXS8Z9MpJWMx4SU"
   },
   "0.2.33": {
-    "hash": "/ipfs/QmRuYyYUwYSZsJ6kxj2U1TWzdwPsZ6pzo8t1BDbC9Bmq57",
+    "hash": "/ipfs/QmSgutZUPNwAtE1JUmqNYHe8S1WVaYYrQY7gQkLnZfj8q5",
     "type": "directory",
     "uploadedTo": {
-      "dappnode": "Wed, 29 Apr 2020 18:16:35 GMT",
-      "remote": "Thu, 30 Apr 2020 08:40:24 GMT"
+      "remote": "Thu, 30 Apr 2020 17:32:56 GMT"
     },
-    "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.33&h=%2Fipfs%2FQmRuYyYUwYSZsJ6kxj2U1TWzdwPsZ6pzo8t1BDbC9Bmq57"
+    "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.33&h=%2Fipfs%2FQmSgutZUPNwAtE1JUmqNYHe8S1WVaYYrQY7gQkLnZfj8q5"
   }
 }
