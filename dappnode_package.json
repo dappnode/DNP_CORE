@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "description": "DAppNode package responsible for manage the core packages",
   "type": "dncore",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
@@ -27,7 +27,7 @@
     "vpn.dnp.dappnode.eth": "0.2.5",
     "wamp.dnp.dappnode.eth": "0.2.2",
     "admin.dnp.dappnode.eth": "0.2.20",
-    "dappmanager.dnp.dappnode.eth": "0.2.31",
+    "dappmanager.dnp.dappnode.eth": "0.2.32",
     "wifi.dnp.dappnode.eth": "0.2.3"
   },
   "runOrder": [
