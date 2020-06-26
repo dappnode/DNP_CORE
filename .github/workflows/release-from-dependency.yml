@@ -1,0 +1,22 @@
+name: Release from dependency
+on:
+  repository_dispatch:
+    types: [build_release]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: echo "This is a test"
+      # - name: dappnodesdk install
+      #   run: npm install -g @dappnode/dappnodesdk
+      # - name: Docker-Compose Build
+      #   run: docker-compose build
+      # - name: publish
+      #   run: dappnodesdk publish patch --dappnode_team_preset --provider infura
