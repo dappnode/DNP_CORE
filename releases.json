@@ -102,5 +102,12 @@
       "remote": "Thu, 21 May 2020 18:34:39 GMT"
     },
     "link": "http://my.dappnode/#/sdk/publish/r=core.dnp.dappnode.eth&v=0.2.35&h=%2Fipfs%2FQmPotipKEVveRKKd1S8JQfA78xH6WoKrjMzuDRus9X3YtC"
+  },
+  "0.2.37": {
+    "hash": "/ipfs/QmPXT4ZhSwTKUZf3wWbFAcWHb6ygKvnD4TUCXBU7Te1j9P",
+    "type": "directory",
+    "uploadedTo": {
+      "dappnode": "Wed, 29 Jul 2020 10:05:14 GMT"
+    }
   }
 }
