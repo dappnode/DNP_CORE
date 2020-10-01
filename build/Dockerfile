@@ -13,7 +13,7 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/bin/docker /usr/bin/docker
 
-RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
+RUN apk -u add --no-cache bash curl
     ALPINE_GLIBC_PACKAGE_VERSION="2.28-r0" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
@@ -44,10 +44,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
     "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
     "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
-RUN wget https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64 -O /usr/local/bin/docker-compose \
+RUN curl -L https://github.com/dappnode/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-$(uname -m) > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose
-
-RUN apk -u add bash 
 
 ENV COMPOSE_IGNORE_ORPHANS true
 
