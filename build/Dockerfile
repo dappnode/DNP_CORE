@@ -5,21 +5,18 @@ RUN apk add --update --no-cache \
 
 WORKDIR /usr/src/app
 
+
+
 FROM alpine
 
 ENV DOCKER_COMPOSE_VERSION 1.25.5
+ENV COMPOSE_IGNORE_ORPHANS true
 
 WORKDIR /usr/src/app
 
+RUN apk -u add --no-cache bash docker-compose
+
 COPY --from=build /usr/bin/docker /usr/bin/docker
-
-RUN apk -u add --no-cache bash curl
-
-RUN curl -L https://github.com/dappnode/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-$(uname -m) > /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose
-
-ENV COMPOSE_IGNORE_ORPHANS true
-
 COPY entrypoint.sh .
 COPY upgrades ./upgrades
 COPY scripts ./scripts
