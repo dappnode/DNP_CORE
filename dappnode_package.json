@@ -26,7 +26,7 @@
     "bind.dnp.dappnode.eth": "0.2.6",
     "ipfs.dnp.dappnode.eth": "0.2.11",
     "vpn.dnp.dappnode.eth": "0.2.7",
-    "dappmanager.dnp.dappnode.eth": "0.2.35",
+    "dappmanager.dnp.dappnode.eth": "0.2.36",
     "wifi.dnp.dappnode.eth": "0.2.4"
   },
   "runOrder": [
