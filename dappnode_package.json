@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.39",
+  "version": "0.2.41",
   "description": "DAppNode package responsible for manage the core packages",
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
@@ -8,9 +8,7 @@
   "contributors": [
     "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
   ],
-  "keywords": [
-    "DAppNodeCore"
-  ],
+  "keywords": ["DAppNodeCore"],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
   },
