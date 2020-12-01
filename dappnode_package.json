@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.41",
+  "version": "1.0.1",
   "description": "DAppNode package responsible for manage the core packages",
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
