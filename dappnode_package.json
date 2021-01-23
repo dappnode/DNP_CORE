@@ -22,10 +22,10 @@
   "license": "GPL-3.0",
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.6",
-    "ipfs.dnp.dappnode.eth": "0.2.12",
-    "vpn.dnp.dappnode.eth": "0.2.7",
-    "dappmanager.dnp.dappnode.eth": "0.2.37",
-    "wifi.dnp.dappnode.eth": "0.2.5"
+    "ipfs.dnp.dappnode.eth": "0.2.14",
+    "vpn.dnp.dappnode.eth": "0.2.8",
+    "dappmanager.dnp.dappnode.eth": "0.2.38",
+    "wifi.dnp.dappnode.eth": "0.2.6"
   },
   "runOrder": [
     "vpn.dnp.dappnode.eth",
