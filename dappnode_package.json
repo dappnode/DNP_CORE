@@ -24,7 +24,7 @@
     "vpn.dnp.dappnode.eth": "0.2.8",
     "dappmanager.dnp.dappnode.eth": "0.2.39",
     "wifi.dnp.dappnode.eth": "0.2.6",
-    "https.dnp.dappnode.eth": "0.1.0"
+    "https-portal.dnp.dappnode.eth": "0.1.0"
   },
   "runOrder": ["vpn.dnp.dappnode.eth", "core.dnp.dappnode.eth", "dappmanager.dnp.dappnode.eth"],
   "changelog": "",
