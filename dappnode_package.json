@@ -5,9 +5,7 @@
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
-  "contributors": [
-    "Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"
-  ],
+  "contributors": ["Eduardo Antuña <eduadiez@gmail.com> (https://github.com/eduadiez)"],
   "keywords": ["DAppNodeCore"],
   "links": {
     "homepage": "https://github.com/dappnode/DNP_CORE#readme"
@@ -24,14 +22,11 @@
     "bind.dnp.dappnode.eth": "0.2.6",
     "ipfs.dnp.dappnode.eth": "0.2.14",
     "vpn.dnp.dappnode.eth": "0.2.8",
-    "dappmanager.dnp.dappnode.eth": "0.2.38",
-    "wifi.dnp.dappnode.eth": "0.2.6"
+    "dappmanager.dnp.dappnode.eth": "0.2.39",
+    "wifi.dnp.dappnode.eth": "0.2.6",
+    "https.dnp.dappnode.eth": "0.1.0"
   },
-  "runOrder": [
-    "vpn.dnp.dappnode.eth",
-    "core.dnp.dappnode.eth",
-    "dappmanager.dnp.dappnode.eth"
-  ],
+  "runOrder": ["vpn.dnp.dappnode.eth", "core.dnp.dappnode.eth", "dappmanager.dnp.dappnode.eth"],
   "changelog": "",
   "updateAlerts": [],
   "warnings": {}
