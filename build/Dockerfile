@@ -9,6 +9,7 @@ COPY upgrades ./upgrades
 COPY scripts ./scripts
 COPY deb ./deb
 COPY grab_hashes.sh ./grab_hashes.sh
+COPY hostScripts ./hostScripts
 
 RUN ./grab_hashes.sh && cat /usr/src/app/packages-content-hash.csv
 
