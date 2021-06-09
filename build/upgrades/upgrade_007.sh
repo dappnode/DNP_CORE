@@ -21,6 +21,7 @@ grep -qF 'dappnode_wireguard' $DAPPNODE_PROFILE ||
 [ ! -f $DAPPNODE_ACCESS_CREDENTIALS ] || [ ! -f $DAPPNODE_PROFILE ] && \
 echo ".dappnode_profile OR dappnode_access_credentials.sh do not exist" && exit 1
 
+# Call dappnode_access_credentials.sh script on every session
 grep -qF "dappnode_access_credentials" $DAPPNODE_PROFILE || echo "/bin/bash ${DAPPNODE_ACCESS_CREDENTIALS}" >>$DAPPNODE_PROFILE
 
 # LOGS MIGRATION
