@@ -18,7 +18,7 @@ grep -qF "dappnode_wifi" $DAPPNODE_PROFILE || cp -rf /usr/src/app/hostScripts/.d
 mkdir -p $HOST_SCRIPTS_DIR
 [ -f $DAPPNODE_ACCESS_CREDENTIALS ] || cp -rf /usr/src/app/hostScripts/.dappnode_access_credentials.sh $DAPPNODE_ACCESS_CREDENTIALS
 # Call dappnode_access_credentials.sh script on every session
-grep -qF "dappnode_access_credentials" $DAPPNODE_PROFILE || echo "/bin/bash ${DAPPNODE_ACCESS_CREDENTIALS}" >>$DAPPNODE_PROFILE
+grep -qF "dappnode_access_credentials" $DAPPNODE_PROFILE || sed -i '/return/i /bin/bash ${DAPPNODE_ACCESS_CREDENTIALS}' $DAPPNODE_PROFILE
 
 # LOGS MIGRATION: logs dir was changed to /usr/src/dappnode/logs/
 ls -1 *.log &>/dev/null && \

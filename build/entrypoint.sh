@@ -11,8 +11,6 @@ chmod +x /usr/src/dappnode/DNCORE/scripts/upgrade/*.sh
 cp -fr ./deb /usr/src/dappnode/DNCORE/scripts/upgrade/
 # Copy hashes
 cp ./packages-content-hash.csv /usr/src/dappnode/DNCORE/packages-content-hash.csv
-# Copy host scripts
-cp -rf ./hostScripts/* /usr/src/dappnode/scripts
 
 # Apply all local upgrades
 for filename in ./upgrades/upgrade_*.sh; do
