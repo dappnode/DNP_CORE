@@ -11,7 +11,7 @@ COPY deb ./deb
 COPY grab_hashes.sh ./grab_hashes.sh
 
 RUN ./grab_hashes.sh && cat /usr/src/app/packages-content-hash.csv && \
-    mkdir /usr/src/app/hostScripts && \
+    mkdir -p /usr/src/app/hostScripts && \
     wget -qO /usr/src/app/hostScripts/dappnode_access_credentials.sh https://github.com/dappnode/DAppNode/releases/download/v0.2.44/dappnode_access_credentials.sh && \
     wget -qO /usr/src/app/hostScripts/.dappnode_profile https://github.com/dappnode/DAppNode/releases/download/v0.2.44/dappnode_profile.sh
 
