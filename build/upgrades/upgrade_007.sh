@@ -2,7 +2,6 @@
 
 # Upgrade from 0.2.44 to 0.2.45
 
-GITHUB_URL="https://github.com/dappnode/DAppNode/releases/download/v0.2.44/"
 DAPPNODE_DIR="/usr/src/dappnode"
 DAPPNODE_DNCORE_DIR="$DAPPNODE_DIR/DNCORE"
 HOST_SCRIPTS_DIR="$DAPPNODE_DIR/scripts"
