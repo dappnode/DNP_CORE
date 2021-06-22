@@ -21,7 +21,7 @@
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.6",
     "ipfs.dnp.dappnode.eth": "0.2.14",
-    "dappmanager.dnp.dappnode.eth": "0.2.41",
+    "dappmanager.dnp.dappnode.eth": "0.2.42",
     "wifi.dnp.dappnode.eth": "0.2.7"
   },
   "runOrder": ["vpn.dnp.dappnode.eth", "core.dnp.dappnode.eth", "dappmanager.dnp.dappnode.eth"],
