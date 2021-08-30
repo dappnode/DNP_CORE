@@ -9,16 +9,18 @@ DAPPNODE_ACCESS_CREDENTIALS="$HOST_SCRIPTS_DIR/dappnode_access_credentials.sh"
 DAPPNODE_PROFILE="$DAPPNODE_DNCORE_DIR/.dappnode_profile"
 LOGS_DIR="$DAPPNODE_DIR/logs"
 
+# IMPORTANT! Profile updated in v0.2.48
 # NEW ALIASES in .dappnode_profile
 # 1. Modify existng profile. New profiles contains alias dappnode_wifi, old ones not
-mkdir -p $DAPPNODE_DNCORE_DIR
-grep -qF "dappnode_wifi" $DAPPNODE_PROFILE || cp -rf /usr/src/app/hostScripts/.dappnode_profile $DAPPNODE_PROFILE
+#mkdir -p $DAPPNODE_DNCORE_DIR
+#grep -qF "dappnode_wifi" $DAPPNODE_PROFILE || cp -rf /usr/src/app/hostScripts/.dappnode_profile $DAPPNODE_PROFILE
 
+# IMPORTANT! dappnode_access_credential.sh updated in v0.2.48
 # NEW SCRIPT: dappnode_access_credentials.sh
-mkdir -p $HOST_SCRIPTS_DIR
-[ -f $DAPPNODE_ACCESS_CREDENTIALS ] || cp -rf /usr/src/app/hostScripts/dappnode_access_credentials.sh $DAPPNODE_ACCESS_CREDENTIALS
+#mkdir -p $HOST_SCRIPTS_DIR
+#[ -f $DAPPNODE_ACCESS_CREDENTIALS ] || cp -rf /usr/src/app/hostScripts/dappnode_access_credentials.sh $DAPPNODE_ACCESS_CREDENTIALS
 # Call dappnode_access_credentials.sh script on every session
-grep -qF "dappnode_access_credentials" $DAPPNODE_PROFILE || sed -i "/return/i /bin/bash $DAPPNODE_ACCESS_CREDENTIALS" $DAPPNODE_PROFILE
+#grep -qF "dappnode_access_credentials" $DAPPNODE_PROFILE || sed -i "/return/i /bin/bash $DAPPNODE_ACCESS_CREDENTIALS" $DAPPNODE_PROFILE
 
 # LOGS MIGRATION: logs dir was changed to /usr/src/dappnode/logs/
 ls -1 *.log &>/dev/null && \
