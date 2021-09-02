@@ -7,9 +7,10 @@ services:
   core.dnp.dappnode.eth:
     build: ./build
     restart: "no"
-    image: "core.dnp.dappnode.eth:0.2.47"
+    image: "core.dnp.dappnode.eth:0.2.48"
     container_name: DAppNodeCore-core.dnp.dappnode.eth
     volumes:
+      - "/etc:/etc"
       - "/usr/src/dappnode/:/usr/src/dappnode/"
       - "/var/run/docker.sock:/var/run/docker.sock"
     dns: 172.33.1.2
