@@ -2,12 +2,28 @@ name: "Main"
 on:
   workflow_dispatch:
     inputs:
-      bump:
+      core:
         description: "Bump type, it must be: patch | minor | major"
+        required: true
+      dappmanager:
+        description: "Version of the dappmanager. Only numbers"
+        required: true
+      wifi:
+        description: "Version of the wifi. Only numbers"
+        required: true
+      bind:
+        description: "Version of the bind. Only numbers"
+        required: true
+      ipfs:
+        description: "Version of the ipfs. Only numbers"
         required: true
 
 env:
-  BUMP_TYPE: ${{ github.event.inputs.bump }}
+  CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
+  BIND_VERSION: ${{ github.event.inputs.bind }}
+  IPFS_VERSION: ${{ github.event.inputs.ipfs }}
+  DAPPMANAGER_VERSION: ${{ github.event.inputs.dappmanager }}
+  WIFI_VERSION: ${{ github.event.inputs.wifi }}
 
 jobs:
   release:
@@ -15,16 +31,36 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     steps:
-      - name: Verify input
+      - name: Verify bump type
         run: |
-          [[ "$BUMP_TYPE" == "patch" ]] || [[ "$BUMP_TYPE" == "minor" ]] || \
-          [[ "$BUMP_TYPE" == "major" ]] || { echo "Wrong input, it must be: patch | minor | major"; exit 1;}
+          [[ "$CORE_BUMP_TYPE" == "patch" ]] || [[ "$CORE_BUMP_TYPE" == "minor" ]] || \
+          [[ "$CORE_BUMP_TYPE" == "major" ]] || { echo "Wrong input, it must be: patch | minor | major"; exit 1; }
+      - name: Check versions regex
+        run: |
+          [[ $BIND_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
+          [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "versions introduced in wrong format"; exit 1; }
+
+      # Edit the manifest with the new versions introduced
+      - name: Set new versions
+        run: |
+          sed -i -e "/bind.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${BIND_VERSION}"/"  dappnode_package.json
+          sed -i -e "/ipfs.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${IPFS_VERSION}"/" dappnode_package.json
+          sed -i -e "/dappmanager.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${DAPPMANAGER_VERSION}"/" dappnode_package.json
+          sed -i -e "/wifi.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIFI_VERSION}"/" dappnode_package.json
+          cat dappnode_package.json
+
       - uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
       - name: Publish
-        run: npx @dappnode/dappnodesdk publish ${BUMP_TYPE} --dappnode_team_preset
+        run: npx @dappnode/dappnodesdk publish ${CORE_BUMP_TYPE} --dappnode_team_preset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Commit manifest change
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: bump
+          file_pattern: .dappnode_package.json
