@@ -61,7 +61,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Commit manifest change
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: commit manifest
+        uses: EndBug/add-and-commit@v8
         with:
-          commit_message: bump
-          file_pattern: .dappnode_package.json
+          add: "dappnode_package.json"
+          message: "New release"
