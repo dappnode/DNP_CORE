@@ -60,9 +60,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Commit manifest change
-      - name: commit manifest
-        uses: EndBug/add-and-commit@v8
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
         with:
-          add: "dappnode_package.json"
-          message: "New release"
+          add-paths: "dappnode_package.json"
+          commit-message: "update manifest core packages versions"
+          branch: "update-manifest"
+          title: "update manifest core packages versions"
+          delete-branch: true
