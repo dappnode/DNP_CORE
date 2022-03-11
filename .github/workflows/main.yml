@@ -66,7 +66,7 @@ jobs:
           [ -z "$(git diff dappnode_package.json docker-compose.yml releases.json)" ] && echo '::set-output name=HAS_CHANGED::true' || echo '::set-output name=HAS_CHANGED::false'
 
       - name: Create Pull Request
-        if: steps.git_diff.HAS_CHANGED = 'true'
+        if: steps.git_diff.HAS_CHANGED == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           add-paths: "dappnode_package.json,docker-compose.yml,releases.json"
