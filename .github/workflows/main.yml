@@ -60,10 +60,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check git diff
+        run: |
+          [ -z "$(git diff dappnode_package.json docker-compose.yml releases.json)" ] && { echo "nothing to commit"; exit 0; }
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "update docker image and core packages versions"
+          add-paths: "dappnode_package.json,docker-compose.yml,releases.json"
+          commit-message: "update core packages versions"
           branch: "update-versions"
-          title: "update docker image and core packages versions"
+          title: "update core packages versions"
           delete-branch: true
