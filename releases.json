@@ -109,5 +109,12 @@
     "uploadedTo": {
       "dappnode": "Wed, 29 Jul 2020 10:05:14 GMT"
     }
+  },
+  "0.2.51": {
+    "hash": "/ipfs/QmYAHYGhVyfQcmb6GyNMB9pYgpAdWhfmLXpJaiD9VtsBQd",
+    "uploadedTo": {
+      "http://ipfs.dappnode.io": "Fri, 11 Mar 2022 10:19:54 GMT"
+    },
+    "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.51&h=%2Fipfs%2FQmYAHYGhVyfQcmb6GyNMB9pYgpAdWhfmLXpJaiD9VtsBQd"
   }
 }
