@@ -63,7 +63,7 @@ jobs:
       - name: Check git diff
         id: git_diff
         run: |
-          [ -z "$(git diff dappnode_package.json docker-compose.yml releases.json)" ] && echo '::set-output name=HAS_CHANGED::true' || echo '::set-output name=HAS_CHANGED::false'
+          git diff --no-patch dappnode_package.json docker-compose.yml releases.json && echo '::set-output name=HAS_CHANGED::true' || echo '::set-output name=HAS_CHANGED::false'
 
       - name: Create Pull Request
         if: steps.git_diff.HAS_CHANGED == 'true'
