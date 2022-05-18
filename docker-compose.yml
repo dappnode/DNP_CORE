@@ -5,7 +5,7 @@ networks:
     external: true
 services:
   core.dnp.dappnode.eth:
-    build: ./build
+    build: ./src
     restart: "no"
     image: "core.dnp.dappnode.eth:0.2.54"
     container_name: DAppNodeCore-core.dnp.dappnode.eth
