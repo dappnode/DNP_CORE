@@ -11,9 +11,10 @@ MAX_USER_WATCHES=524288
 current=$(cat /proc/sys/fs/inotify/max_user_watches)
 
 if [ $current -lt $MAX_USER_WATCHES ];then
-    sudo cp /etc/sysctl.conf /etc/sysctl.conf.bck
+    cp /etc/sysctl.conf /etc/sysctl.conf.bck
+    sysctl -w fs.inotify.max_user_watches=${MAX_USER_WATCHES}
     sed -i '/fs.inotify.max_user_watches=.*/d' /etc/sysctl.conf
-    echo fs.inotify.max_user_watches=${MAX_USER_WATCHES} | sudo tee -a /etc/sysctl.conf && sudo sysctl -p || (cp /etc/sysctl.conf.bck /etc/sysctl.conf && sudo sysctl -p)
+    echo fs.inotify.max_user_watches=${MAX_USER_WATCHES} | tee -a /etc/sysctl.conf && sysctl -p || (cp /etc/sysctl.conf.bck /etc/sysctl.conf && sysctl -p)
 else
     echo "The max_user_watches is correct"
 fi
