@@ -1,6 +1,4 @@
 #!/bin/sh
 
-# Upgrade from 0.1.x to 0.2.0
-grep -qF 'alias dappnode_get=' /usr/src/dappnode/DNCORE/.dappnode_profile || sed  -i "/alias dappnode_start/a alias dappnode_get='docker exec -t DAppNodeCore-vpn.dnp.dappnode.eth vpncli get'" /usr/src/dappnode/DNCORE/.dappnode_profile
-grep -qF 'IPSec' /usr/src/dappnode/DNCORE/.dappnode_profile && sed  -i "s,L2TP/IPSec,OpenVPN," /usr/src/dappnode/DNCORE/.dappnode_profile
-grep -qF 'my\.admin\.dnp\.dappnode\.eth' /usr/src/dappnode/DNCORE/.dappnode_profile && sed  -i "s/my\.admin\.dnp\.dappnode\.eth/my\.dappnode/" /usr/src/dappnode/DNCORE/.dappnode_profile
+# Run script on the host with the nsenter tool
+docker run --rm --privileged --pid=host -t alpine:3.8 nsenter -t 1 -m -u -n -i /usr/src/dappnode/DNCORE/scripts/upgrade/install_usbmount.sh
