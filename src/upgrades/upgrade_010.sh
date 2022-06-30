@@ -1,6 +1,10 @@
 #!/bin/sh
 
-# Upgrade from 0.2.47 to 0.2.48
+# Upgrade from 0.2.55 to 0.2.56
+# Set latest profile
+# Set welcome message
+# Set dappnode_access_credentials script
+# Logs dir migration
 
 DAPPNODE_DIR="/usr/src/dappnode"
 LOGS_DIR="/usr/src/dappnode/logs"
