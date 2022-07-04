@@ -1,20 +1,29 @@
 #!/bin/sh
 
-## Motivation:
-##    We have seen that nethermind can have some issues when this limit is low
-## References:
-##    https://www.suse.com/support/kb/doc/?id=000020048
-##    https://aaujayasena.medium.com/how-to-increasing-the-amount-of-inotify-watchers-18f870fbdc40
+# Upgrade from 0.2.55 to 0.2.56
 
-MAX_USER_WATCHES=524288
+# Upgrade to latest:
+# - dappnode_access_credentials.sh
+# - .dappnode_profile
+# Copy welcome message
 
-current=$(cat /proc/sys/fs/inotify/max_user_watches)
+DAPPNODE_DIR="/usr/src/dappnode"
+DAPPNODE_ACCESS_CREDENTIALS="${DAPPNODE_DIR}/scripts/dappnode_access_credentials.sh"
+DAPPNODE_PROFILE="${DAPPNODE_DIR}/DNCORE/.dappnode_profile"
+MOTD="/etc/motd"
+WELCOME_MESSAGE="\nChoose a way to connect to your DAppNode, then go to \e[1mhttp://my.dappnode\e[0m\n\n\e[1m- Wifi\e[0m\t\tScan and connect to DAppNodeWIFI. Get wifi credentials with \e[32mdappnode_wifi\e[0m\n\n\e[1m- Local Proxy\e[0m\tConnect to the same router as your DAppNode. Then go to \e[1mhttp://dappnode.local\e[0m\n\n\e[1m- Wireguard\e[0m\tDownload Wireguard app on your device. Get your dappnode wireguard credentials with \e[32mdappnode_wireguard\e[0m\n\n\e[1m- Open VPN\e[0m\tDownload OPen VPN app on your device. Get your openVPN creds with \e[32mdappnode_openvpn\e[0m\n\n\nTo see a full list of commands available execute \e[32mdappnode_help\e[0m\n"
 
-if [ $current -lt $MAX_USER_WATCHES ];then
-    cp /etc/sysctl.conf /etc/sysctl.conf.bck
-    sysctl -w fs.inotify.max_user_watches=${MAX_USER_WATCHES}
-    sed -i '/fs.inotify.max_user_watches=.*/d' /etc/sysctl.conf
-    echo fs.inotify.max_user_watches=${MAX_USER_WATCHES} | tee -a /etc/sysctl.conf && sysctl -p || (cp /etc/sysctl.conf.bck /etc/sysctl.conf && sysctl -p)
-else
-    echo "The max_user_watches is correct"
-fi
+# Profile
+echo "Copying new profile..."
+grep -qF "dappnode_help" $DAPPNODE_PROFILE || cp -rf /usr/src/app/hostScripts/.dappnode_profile $DAPPNODE_PROFILE
+# Remove return from profile
+echo "Removing return from profile..."
+sed -i '/return/d' $DAPPNODE_PROFILE
+
+# New welcome message
+echo "Adding welcome message to ${MOTD}..."
+[ -f $MOTD ] && { grep -qF "Choose a way to connect to your DAppNode" $MOTD || echo -e "$WELCOME_MESSAGE" >>$MOTD; }
+
+# script
+echo "Copying new access_credentials script"
+[ -f $DAPPNODE_ACCESS_CREDENTIALS ] && grep -qF "line_separator" $DAPPNODE_ACCESS_CREDENTIALS || cp -rf /usr/src/app/hostScripts/dappnode_access_credentials.sh $DAPPNODE_ACCESS_CREDENTIALS
