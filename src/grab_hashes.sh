@@ -1,7 +1,7 @@
 #!/bin/bash
 SWGET="wget -q -O-"
 DAPPNODE_DIR="/usr/src/app"
-CONTENT_HASH_PKGS=(geth openethereum nethermind)
+CONTENT_HASH_PKGS=(geth nethermind erigon prysm teku lighthouse nimbus)
 CONTENT_HASH_FILE="${DAPPNODE_DIR}/packages-content-hash.csv"
 
 grabContentHashes() {
