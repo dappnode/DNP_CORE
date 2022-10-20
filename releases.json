@@ -158,5 +158,12 @@
       "http://ipfs.dappnode.io:5001": "Fri, 09 Sep 2022 11:20:51 GMT"
     },
     "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.58&h=%2Fipfs%2FQmRRRYaM5TpfPHoqmnmTGVpeeWqhgo1Sr41v3KVWHAq251"
+  },
+  "0.2.59": {
+    "hash": "/ipfs/QmSjpuN6vEDQJiNqXth4dYZpwidksX3MNtrX8g3PsYmffa",
+    "uploadedTo": {
+      "http://ipfs.dappnode.io:5001": "Thu, 20 Oct 2022 07:55:28 GMT"
+    },
+    "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.59&h=%2Fipfs%2FQmSjpuN6vEDQJiNqXth4dYZpwidksX3MNtrX8g3PsYmffa"
   }
 }
