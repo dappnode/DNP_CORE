@@ -2,7 +2,7 @@
 
 # BASED ON: https://anto.online/code/bash-script-to-create-a-swap-file-in-linux/
 
-FREE_DISK_SPACE=$(df -kT / | awk '{print $5}'|sed 's/.$//' | grep -vw "^Availabl")
+FREE_DISK_SPACE=$(df -kl / | awk '{print $5}'|sed 's/.$//' | grep -vw "^Availabl")
 MIN_DISK_SPACE=52428800
 SWAP_SIZE=$(grep Swap /proc/meminfo | grep "SwapTotal" | awk '{print $2}')
 MIN_SWAP_SIZE=16777216 # In KB
@@ -139,7 +139,7 @@ setupSwappiness(){
 }
 
 if [[ "$FREE_DISK_SPACE" -lt "$MIN_DISK_SPACE" ]]; then
-  echo "There is not enough disk space to upgrade the swap. Free disk space: $FREE_DISK_SPACE MB. Minimum required: $MIN_DISK_SPACE MB";
+  echo "There is not enough disk space to upgrade the swap. Free disk space: $FREE_DISK_SPACE KB. Minimum required: $MIN_DISK_SPACE KB";
   exit 0
 fi
 
