@@ -1,4 +1,4 @@
-#!/bin/bash -x 
+#!/bin/bash
 
 # BASED ON: https://anto.online/code/bash-script-to-create-a-swap-file-in-linux/
 
