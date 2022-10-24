@@ -5,7 +5,7 @@
 FREE_DISK_SPACE=$(df -kl / | tail -1 | awk '{print $4}')
 MIN_DISK_SPACE=52428800
 SWAP_SIZE=$(grep Swap /proc/meminfo | grep "SwapTotal" | awk '{print $2}')
-MIN_SWAP_SIZE=16777216 # In KB
+MIN_SWAP_SIZE=16777000 # Use a lower value to admit tolerance (the real value in KB is 16777216)
 
 #remove disable swap, remove it and remove entry from fstab
 removeSwap() {
