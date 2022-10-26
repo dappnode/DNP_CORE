@@ -19,17 +19,23 @@ removeSwap() {
   swapSpace=$(swapon -s | tail -1 | awk '{print $1}' | cut -d '/' -f 2)
   #debug: echo $swapSpace
 
-  #turn off swapping
-  swapoff /$swapSpace
+  # Check swapSpace exists and it is a file
+  if [ -f "/$swapSpace" ]; then
+    #turn off swapping
+    swapoff /$swapSpace
 
-  #make backup of fstab
-  cp /etc/fstab /etc/fstab.$backupTime
+    #make backup of fstab
+    cp /etc/fstab /etc/fstab.$backupTime
 
-  #remove swap space entry from fstab
-  sed -i "/swap/d" /etc/fstab
+    #remove swap space entry from fstab
+    sed -i "/swap/d" /etc/fstab
 
-  #remove swapfile
-  rm -f "/$swapSpace"
+    #remove swapfile
+    rm -f "/$swapSpace"
+  else
+    echo "Swapfile not found."
+    echo ""
+  fi
 
   echo ""
   echo "--> Done"
