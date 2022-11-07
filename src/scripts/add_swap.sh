@@ -52,7 +52,7 @@ createSwap() {
   #debug: echo $availMemMb
 
   #convert from kb to mb to gb
-  gb=$(awk "BEGIN {print $availMemMb/1024/1204}")
+  gb=$(awk "BEGIN {print $availMemMb/1024/1024}")
   #debug: echo $gb
 
   #round the number to nearest gb
