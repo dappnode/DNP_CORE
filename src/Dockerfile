@@ -2,7 +2,7 @@ FROM alpine
 
 WORKDIR /usr/src/app
 
-RUN apk -u add --no-cache bash docker-compose docker
+RUN apk -u add --no-cache bash docker-compose docker curl
 
 COPY entrypoint.sh .
 COPY upgrades ./upgrades
