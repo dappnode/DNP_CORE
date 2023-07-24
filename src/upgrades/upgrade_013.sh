@@ -3,7 +3,6 @@
 # Upgrade from 0.2.75 to 0.2.76
 
 # Install Debian unattended-upgrades if not installed and enable it
-# This script might be executed in Ubuntu, Debian, or Raspbian
 
 # Check if unattended-upgrades is installed
 dpkg -s unattended-upgrades
