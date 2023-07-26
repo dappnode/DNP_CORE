@@ -41,7 +41,7 @@ modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Automatic-Rebo
 # Check and configure auto-upgrades config file
 auto_upgrades_file="/etc/apt/apt.conf.d/20auto-upgrades"
 if [ ! -f "$auto_upgrades_file" ]; then
-    # Create the file
+    # Create the file as shown in https://wiki.debian.org/UnattendedUpgrades
     echo "[INFO] Auto upgrades file ($auto_upgrades_file) does not exist. Creating it..."
     echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
     dpkg-reconfigure -f noninteractive unattended-upgrades
