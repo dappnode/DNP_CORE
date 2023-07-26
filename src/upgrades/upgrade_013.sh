@@ -9,8 +9,8 @@ dpkg -s unattended-upgrades
 if [ $? -ne 0 ]; then
     # Install unattended-upgrades
     echo "[INFO] Installing unattended-upgrades..."
-    apt update
-    apt install -y unattended-upgrades
+    apt-get update
+    apt-get install -y unattended-upgrades
 fi
 
 # Modifies a config file
