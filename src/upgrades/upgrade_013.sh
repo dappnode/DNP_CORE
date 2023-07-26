@@ -6,6 +6,7 @@
 # OS supported: Ubuntu, Debian, Raspbian
 # TODO: rollback docker? /var/lib/docker
 # TODO: research if previous removal is needed
+# TODO: implement `systemctl restart docker` if docker was installed but not started
 
 # log function with argument string to print to the log file /usr/src/dappnode/logs/upgrade_013.log. print with date in beautifull format
 log() {
@@ -70,9 +71,9 @@ log "OS: $OS ; Version: $VERSION ; Docker version: $DOCKER_VERSION"
 
 # TODO: research Remove old docker installation
 # TODO: consider checking in cache policy that the packages to be installed from the repository exist
-#for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
-#  apt-get remove $pkg
-#done
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
+  apt-get remove $pkg
+done
 
 # Set up the repository
 log "Set up the repository"
@@ -136,7 +137,7 @@ if [ -x "$(command -v docker-compose)" ]; then
   if ! grep -q "alias docker-compose='docker compose'" /usr/src/dappnode/DNCORE/.dappnode_profile; then
     log "Adding docker-compose alias to the dappnode profile"
     echo "alias docker-compose='docker compose'" >>/usr/src/dappnode/DNCORE/.dappnode_profile
-    source /usr/src/dappnode/DNCORE/.dappnode_profile | tee -a /usr/src/dappnode/logs/upgrade_013.log
+    . /usr/src/dappnode/DNCORE/.dappnode_profile | tee -a /usr/src/dappnode/logs/upgrade_013.log
     if [ $? -ne 0 ]; then
       log "Failed to source dappnode profile."
       exit 1
