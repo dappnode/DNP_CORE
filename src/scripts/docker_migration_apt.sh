@@ -4,6 +4,7 @@
 
 # Switch docker installtion method to use apt official repository
 # OS supported: Ubuntu, Debian, Raspbian
+# TODO: check if its needed to execute the script docker installed through pkg or apt
 # TODO: rollback docker? /var/lib/docker
 # TODO: research if previous removal is needed
 # TODO: implement `systemctl restart docker` if docker was installed but not started
@@ -18,15 +19,12 @@ export DEBIAN_FRONTEND=noninteractive
 
 log "Starting docker migration to apt repository"
 
-# Check if docker is installed via package manager
-# TODO: consider checking all the docker packages: docker.io docker-doc docker-compose podman-docker containerd runc
-if dpkg -l | grep -i docker; then
-  log "Docker is installed via package manager, skipping upgrade"
-  exit 0
-fi
+# TODO: Check if docker is installed via package manager
 
 # Get docker version
 DOCKER_VERSION=$(docker version --format '{{.Server.Version}}')
+
+# array of legacy docker versions installed in dappnode
 
 # Check the OS
 if [ -f /etc/os-release ]; then
@@ -107,8 +105,8 @@ if [ $? -ne 0 ]; then
 fi
 # 3. Use the following command to set up the repository
 echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] "${DOWNLOAD_REPO_URL}" \
-  "$(source /etc/os-release && echo "$VERSION_CODENAME")" stable" |
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] ${DOWNLOAD_REPO_URL} \
+  $(source /etc/os-release && echo "$VERSION_CODENAME") stable" |
   tee /etc/apt/sources.list.d/docker.list >/dev/null
 if [ $? -ne 0 ]; then
   log "Failed to add docker repository."
@@ -124,7 +122,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 # 2. Install Docker Engine, containerd, and Docker Compose.
-apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin | tee -a /usr/src/dappnode/logs/upgrade_013.log
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y | tee -a /usr/src/dappnode/logs/upgrade_013.log
 if [ $? -ne 0 ]; then
   log "Failed to install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin."
   exit 1
