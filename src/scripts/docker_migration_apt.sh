@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Upgrade from 0.2.76 to 0.2.77
 
@@ -30,14 +30,14 @@ DOCKER_VERSION=$(docker version --format '{{.Server.Version}}')
 
 # Check the OS
 if [ -f /etc/os-release ]; then
-  . /etc/os-release
+  source /etc/os-release
   OS=$NAME
   VERSION=$VERSION_ID
 elif type lsb_release >/dev/null 2>&1; then
   OS=$(lsb_release -si)
   VERSION=$(lsb_release -sr)
 elif [ -f /etc/lsb-release ]; then
-  . /etc/lsb-release
+  source /etc/lsb-release
   OS=$DISTRIB_ID
   VERSION=$DISTRIB_RELEASE
 elif [ -f /etc/debian_version ]; then
@@ -108,7 +108,7 @@ fi
 # 3. Use the following command to set up the repository
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] "${DOWNLOAD_REPO_URL}" \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |
+  "$(source /etc/os-release && echo "$VERSION_CODENAME")" stable" |
   tee /etc/apt/sources.list.d/docker.list >/dev/null
 if [ $? -ne 0 ]; then
   log "Failed to add docker repository."
@@ -137,7 +137,7 @@ if [ -x "$(command -v docker-compose)" ]; then
   if ! grep -q "alias docker-compose='docker compose'" /usr/src/dappnode/DNCORE/.dappnode_profile; then
     log "Adding docker-compose alias to the dappnode profile"
     echo "alias docker-compose='docker compose'" >>/usr/src/dappnode/DNCORE/.dappnode_profile
-    . /usr/src/dappnode/DNCORE/.dappnode_profile | tee -a /usr/src/dappnode/logs/upgrade_013.log
+    source /usr/src/dappnode/DNCORE/.dappnode_profile | tee -a /usr/src/dappnode/logs/upgrade_013.log
     if [ $? -ne 0 ]; then
       log "Failed to source dappnode profile."
       exit 1
