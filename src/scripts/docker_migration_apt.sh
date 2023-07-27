@@ -1,21 +1,16 @@
 #!/bin/bash
 
+# Set environment variables to avoid interactive prompts
+export DEBIAN_FRONTEND=noninteractive
+
 # Upgrade from 0.2.76 to 0.2.77
 
 # Switch docker installtion method to use apt official repository
 # OS supported: Ubuntu, Debian, Raspbian
-# TODO: check if its needed to execute the script docker installed through pkg or apt
-# TODO: rollback docker? /var/lib/docker
-# TODO: research if previous removal is needed
-# TODO: implement `systemctl restart docker` if docker was installed but not started
 
-# log function with argument string to print to the log file /usr/src/dappnode/logs/upgrade_013.log. print with date in beautifull format
 log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a /usr/src/dappnode/logs/upgrade_013.log
 }
-
-# Set environment variables to avoid interactive prompts
-export DEBIAN_FRONTEND=noninteractive
 
 log "Starting docker migration to apt repository"
 
@@ -63,12 +58,7 @@ fi
 # Print OS and version for the migration
 log "OS: $OS ; Version: $VERSION ; Docker version: $DOCKER_VERSION"
 
-# TODO: research Backup docker data
-#log "Backup docker data"
-#cp -r /var/lib/docker /var/lib/docker.bak
-
-# TODO: research Remove old docker installation
-# TODO: consider checking in cache policy that the packages to be installed from the repository exist
+# Remove legacy docker packages
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
   apt-get remove $pkg
 done
@@ -129,6 +119,13 @@ if [ $? -ne 0 ]; then
 fi
 # 3. Verify that the Docker Engine installation is successful by running the hello-world image.
 #docker run --rm hello-world && docker rmi hello-world
+
+# Check docker status and restart daemon if needed
+if ! systemctl is-active --quiet docker; then
+  log "Docker is not active, restarting daemon"
+  systemctl daemon-reload
+  systemctl restart docker
+fi
 
 # Add docker-compose alias of docker compose to the dappnode profile if is not already there and if docker compose is installed
 if [ -x "$(command -v docker-compose)" ]; then
