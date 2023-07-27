@@ -9,7 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 # OS supported: Ubuntu, Debian, Raspbian
 
 log() {
-  echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a /usr/src/dappnode/logs/upgrade_013.log
+  echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a /usr/src/dappnode/logs/upgrade_014.log
 }
 
 log "Starting docker install migration from pkg to apt"
