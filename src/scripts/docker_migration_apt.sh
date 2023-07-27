@@ -12,14 +12,17 @@ log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a /usr/src/dappnode/logs/upgrade_013.log
 }
 
-log "Starting docker migration to apt repository"
+log "Starting docker install migration from pkg to apt"
 
-# TODO: Check if docker is installed via package manager
+# Check if docker is installed via apt
+# The docker.list file is created by the docker installation script
+if [  -f /etc/apt/sources.list.d/docker.list ]; then
+  log "Docker is already installed via apt, skipping upgrade"
+  exit 0
+fi
 
 # Get docker version
 DOCKER_VERSION=$(docker version --format '{{.Server.Version}}')
-
-# array of legacy docker versions installed in dappnode
 
 # Check the OS
 if [ -f /etc/os-release ]; then
@@ -139,4 +142,10 @@ if [ -x "$(command -v docker-compose)" ]; then
     fi
     # TODO: consider removing old docker-compose binary
   fi
+fi
+
+# Remove legacy docker download path /usr/src/dappnode/bin/docker/ if exists
+if [ -d /usr/src/dappnode/bin/docker/ ]; then
+  log "Removing legacy docker download path /usr/src/dappnode/bin/docker/"
+  rm -rf /usr/src/dappnode/bin/docker/
 fi
