@@ -3,7 +3,7 @@
 # Set environment variables to avoid interactive prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Upgrade from 0.2.76 to 0.2.77
+# Upgrade from 0.2.77 to 0.2.78
 
 # Switch docker installtion method to use apt official repository
 # OS supported: Ubuntu, Debian, Raspbian
