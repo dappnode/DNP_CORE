@@ -1,15 +1,6 @@
 # Install Debian unattended-upgrades if not installed and enable it
 # Reference: https://wiki.debian.org/UnattendedUpgrades
 
-# Check if unattended-upgrades is installed
-dpkg -s unattended-upgrades
-if [ $? -ne 0 ]; then
-    # Install unattended-upgrades
-    echo "[INFO] Installing unattended-upgrades..."
-    apt-get update
-    apt-get install -y unattended-upgrades
-fi
-
 # Modifies a config file
 modify_config_file() {
     local config_file="$1"
@@ -21,6 +12,15 @@ modify_config_file() {
     echo "$config_setting_key \"$config_setting_value\";" >> "$config_file"
     echo "[INFO] Modified setting $config_setting_key in $config_file"
 }
+
+# Check if unattended-upgrades is installed
+dpkg -s unattended-upgrades
+if [ $? -ne 0 ]; then
+    # Install unattended-upgrades
+    echo "[INFO] Installing unattended-upgrades..."
+    apt-get update
+    apt-get install -y unattended-upgrades
+fi
 
 # Check and configure unattended-upgrades config file
 unattended_config_file="/etc/apt/apt.conf.d/50unattended-upgrades"
