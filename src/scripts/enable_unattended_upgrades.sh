@@ -11,6 +11,31 @@ which=news\n\
 confirm=false\n\
 save_seen=/var/lib/apt/listchanges.db"
 
+# Install package if not installed
+install_package() {
+    local package_name="$1"
+    dpkg -s "$package_name" >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "[INFO] Installing $package_name..."
+        apt-get update
+        apt-get install -y "$package_name"
+    else
+        echo "[INFO] $package_name is already installed"
+    fi
+}
+
+# Verifies if package is installed
+verify_package_installed() {
+    local package_name="$1"
+    dpkg -s "$package_name" >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "[ERROR] $package_name is not installed"
+        exit 1
+    else
+        echo "[INFO] $package_name is installed"
+    fi
+}
+
 # Modifies a config file
 modify_config_file() {
     local config_file="$1"
@@ -23,14 +48,11 @@ modify_config_file() {
     echo "[INFO] Modified setting $config_setting_key in $config_file"
 }
 
-# Check if unattended-upgrades is installed
-dpkg -s unattended-upgrades
-if [ $? -ne 0 ]; then
-    # Install unattended-upgrades
-    echo "[INFO] Installing unattended-upgrades..."
-    apt-get update
-    apt-get install -y unattended-upgrades
-fi
+# Install unattended-upgrades if not installed
+install_package unattended-upgrades
+
+# Verify unattended-upgrades was installed
+verify_package_installed unattended-upgrades
 
 # Check and configure unattended-upgrades config file
 if [ ! -f "$unattended_config_file" ]; then
@@ -62,21 +84,11 @@ fi
 modify_config_file "$auto_upgrades_file" 'APT::Periodic::Update-Package-Lists' '1'
 modify_config_file "$auto_upgrades_file" 'APT::Periodic::Unattended-Upgrade' '1'
 
-# Check if apt-listchanges is installed (to see changelogs)
-dpkg -s apt-listchanges
-if [ $? -ne 0 ]; then
-    # Install apt-listchanges
-    echo "[INFO] Installing apt-listchanges..."
-    apt-get update
-    apt-get install -y apt-listchanges
-fi
+# Install apt-listchanges if not installed
+install_package apt-listchanges
 
 # Check if apt-listchanges was installed
-dpkg -s apt-listchanges
-if [ $? -ne 0 ]; then
-    echo "[ERROR] apt-listchanges could not be installed"
-    exit 1
-fi
+verify_package_installed apt-listchanges
 
 # Write the configuration content to the apt-listchanges.conf file
 echo -e "$listchanges_config" | tee "$listchanges_config_file" >/dev/null
