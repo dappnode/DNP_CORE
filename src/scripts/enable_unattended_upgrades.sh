@@ -3,6 +3,13 @@
 
 unattended_config_file="/etc/apt/apt.conf.d/50unattended-upgrades"
 auto_upgrades_file="/etc/apt/apt.conf.d/20auto-upgrades"
+listchanges_config_file="/etc/apt/listchanges.conf"
+
+listchanges_config="[apt]\n\
+frontend=pager\n\
+which=news\n\
+confirm=false\n\
+save_seen=/var/lib/apt/listchanges.db"
 
 # Modifies a config file
 modify_config_file() {
@@ -54,3 +61,22 @@ fi
 # Enable automatic updates and unattended-upgrades (file should exist now)
 modify_config_file "$auto_upgrades_file" 'APT::Periodic::Update-Package-Lists' '1'
 modify_config_file "$auto_upgrades_file" 'APT::Periodic::Unattended-Upgrade' '1'
+
+# Check if apt-listchanges is installed (to see changelogs)
+dpkg -s apt-listchanges
+if [ $? -ne 0 ]; then
+    # Install apt-listchanges
+    echo "[INFO] Installing apt-listchanges..."
+    apt-get update
+    apt-get install -y apt-listchanges
+fi
+
+# Check if apt-listchanges was installed
+dpkg -s apt-listchanges
+if [ $? -ne 0 ]; then
+    echo "[ERROR] apt-listchanges could not be installed"
+    exit 1
+fi
+
+# Write the configuration content to the apt-listchanges.conf file
+echo -e "$listchanges_config" | tee "$listchanges_config_file" >/dev/null
