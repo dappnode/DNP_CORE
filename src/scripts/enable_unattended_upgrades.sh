@@ -14,10 +14,10 @@ save_seen=/var/lib/apt/listchanges.db"
 # Install package if not installed
 install_package() {
     local package_name="$1"
+    apt-get update
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
-        apt-get update
         apt-get install -y "$package_name"
     else
         echo "[INFO] $package_name is already installed"
@@ -50,6 +50,13 @@ modify_config_file() {
     echo "$config_setting_key \"$config_setting_value\";" >>"$config_file"
     echo "[INFO] Modified setting $config_setting_key in $config_file"
 }
+
+# Create apt.conf.d directory if it does not exist
+mkdir -p /etc/apt/apt.conf.d/
+
+# Install needed tools
+install_package sed
+install_package tee
 
 # Install unattended-upgrades if not installed
 install_package unattended-upgrades
