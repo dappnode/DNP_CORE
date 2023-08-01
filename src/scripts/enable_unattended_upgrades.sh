@@ -11,6 +11,48 @@ which=news\n\
 confirm=false\n\
 save_seen=/var/lib/apt/listchanges.db"
 
+unattended_upgrades_config="
+// Automatically upgrade packages from these (origin:archive) pairs\n\
+Unattended-Upgrade::Allowed-Origins {\n\
+"${distro_id}:${distro_codename}";\n\
+"${distro_id}:${distro_codename}-security";\n\
+"${distro_id}ESMApps:${distro_codename}-apps-security";\n\
+"${distro_id}ESM:${distro_codename}-infra-security";\n\
+};\n\
+\n\
+// Do not upgrade development release automatically\n\
+Unattended-Upgrade::DevRelease "false";\n\
+\n\
+// Automatically fix unclean dpkg exit\n\
+Unattended-Upgrade::AutoFixInterruptedDpkg "true";\n\
+\n\
+// Reduce upgrade steps to allow interruptions\n\
+Unattended-Upgrade::MinimalSteps "true";\n\
+\n\
+// Do not install updates when machine is shutting down\n\
+Unattended-Upgrade::InstallOnShutdown "false";\n\
+\n\
+// Remove unused automatically installed kernel-related packages\n\
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";\n\
+\n\
+// Do automatic removal of newly unused dependencies after the upgrade\n\
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";\n\
+\n\
+// Do automatic removal of unused packages after the upgrade (apt-get autoremove)\n\
+Unattended-Upgrade::Remove-Unused-Dependencies "false";\n\
+\n\
+// Do not automatically reboot (/var/run/reboot-required found) after the upgrade\n\
+Unattended-Upgrade::Automatic-Reboot "false";\n\
+\n\
+// Non-verbose logging\n\
+Unattended-Upgrade::Verbose "false";\n\
+"
+
+auto_upgrades_config="
+APT::Periodic::Update-Package-Lists \"1\";
+APT::Periodic::Unattended-Upgrade \"1\";
+"
+
 # Install package if not installed
 install_package() {
     local package_name="$1"
@@ -35,20 +77,22 @@ verify_package_installed() {
     fi
 }
 
-# Modifies a config file
-modify_config_file() {
-    local config_file="$1"
-    local config_setting_key="$2"
-    local config_setting_value="$3"
-    if [ ! -f "$config_file" ]; then
-        echo "[ERROR] $config_file does not exist"
+write_content_to_file() {
+    local content="$1"
+    local file="$2"
+
+    if [ ! -f "$file" ]; then
+        echo "[ERROR] $file does not exist"
         exit 1
     fi
-    # Remove any appearances of the key from the file
-    sed -i "/^$config_setting_key .*/d" "$config_file"
-    # Add the updated setting
-    echo "$config_setting_key \"$config_setting_value\";" >>"$config_file"
-    echo "[INFO] Modified setting $config_setting_key in $config_file"
+
+    echo -e "$content" | tee "$file" >/dev/null
+
+    if [ $? -eq 0 ]; then
+        echo "[INFO] Modified $file"
+    else
+        echo "[INFO] $file was not modified"
+    fi
 }
 
 # Create apt.conf.d directory if it does not exist
@@ -64,9 +108,8 @@ install_package unattended-upgrades
 # Verify unattended-upgrades was installed
 verify_package_installed unattended-upgrades
 
-# Enable automatic removal of unused dependencies and disable automatic reboot
-modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Remove-Unused-Dependencies' 'true'
-modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Automatic-Reboot' 'false'
+# Set custom config for unattended-upgrades
+write_content_to_file "$unattended_upgrades_config" "$unattended_config_file"
 
 # Check and configure auto-upgrades config file
 if [ ! -f "$auto_upgrades_file" ]; then
@@ -77,8 +120,7 @@ if [ ! -f "$auto_upgrades_file" ]; then
 fi
 
 # Enable automatic updates and unattended-upgrades (file should exist now)
-modify_config_file "$auto_upgrades_file" 'APT::Periodic::Update-Package-Lists' '1'
-modify_config_file "$auto_upgrades_file" 'APT::Periodic::Unattended-Upgrade' '1'
+write_content_to_file "$auto_upgrades_config" "$auto_upgrades_file"
 
 # Install apt-listchanges if not installed
 install_package apt-listchanges
