@@ -56,7 +56,7 @@ mkdir -p /etc/apt/apt.conf.d/
 
 # Install needed tools
 install_package sed
-install_package tee
+install_package coreutils
 
 # Install unattended-upgrades if not installed
 install_package unattended-upgrades
