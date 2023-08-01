@@ -14,10 +14,10 @@ save_seen=/var/lib/apt/listchanges.db"
 unattended_upgrades_config="
 // Automatically upgrade packages from these (origin:archive) pairs\n\
 Unattended-Upgrade::Allowed-Origins {\n\
-"${distro_id}:${distro_codename}";\n\
-"${distro_id}:${distro_codename}-security";\n\
-"${distro_id}ESMApps:${distro_codename}-apps-security";\n\
-"${distro_id}ESM:${distro_codename}-infra-security";\n\
+\"${distro_id}:${distro_codename}\";\n\
+\"${distro_id}:${distro_codename}-security\";\n\
+\"${distro_id}ESMApps:${distro_codename}-apps-security\";\n\
+\"${distro_id}ESM:${distro_codename}-infra-security\";\n\
 };\n\
 \n\
 // Do not upgrade development release automatically\n\
