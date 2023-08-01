@@ -40,6 +40,10 @@ modify_config_file() {
     local config_file="$1"
     local config_setting_key="$2"
     local config_setting_value="$3"
+    if [ ! -f "$config_file" ]; then
+        echo "[ERROR] $config_file does not exist"
+        exit 1
+    fi
     # Remove any appearances of the key from the file
     sed -i "/^$config_setting_key .*/d" "$config_file"
     # Add the updated setting
