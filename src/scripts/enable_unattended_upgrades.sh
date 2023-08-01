@@ -1,6 +1,9 @@
 # Install Debian unattended-upgrades if not installed and enable it
 # Reference: https://wiki.debian.org/UnattendedUpgrades
 
+unattended_config_file="/etc/apt/apt.conf.d/50unattended-upgrades"
+auto_upgrades_file="/etc/apt/apt.conf.d/20auto-upgrades"
+
 # Modifies a config file
 modify_config_file() {
     local config_file="$1"
@@ -9,7 +12,7 @@ modify_config_file() {
     # Remove any appearances of the key from the file
     sed -i "/^$config_setting_key .*/d" "$config_file"
     # Add the updated setting
-    echo "$config_setting_key \"$config_setting_value\";" >> "$config_file"
+    echo "$config_setting_key \"$config_setting_value\";" >>"$config_file"
     echo "[INFO] Modified setting $config_setting_key in $config_file"
 }
 
@@ -23,7 +26,6 @@ if [ $? -ne 0 ]; then
 fi
 
 # Check and configure unattended-upgrades config file
-unattended_config_file="/etc/apt/apt.conf.d/50unattended-upgrades"
 if [ ! -f "$unattended_config_file" ]; then
     echo "[ERROR] $unattended_config_file should have been created by the unattended-upgrades package"
     exit 1
@@ -36,7 +38,6 @@ modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Remove-Unused-
 modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Automatic-Reboot' 'false'
 
 # Check and configure auto-upgrades config file
-auto_upgrades_file="/etc/apt/apt.conf.d/20auto-upgrades"
 if [ ! -f "$auto_upgrades_file" ]; then
     # Create the file as shown in https://wiki.debian.org/UnattendedUpgrades
     echo "[INFO] Auto upgrades file ($auto_upgrades_file) does not exist. Creating it..."
