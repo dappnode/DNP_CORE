@@ -27,8 +27,7 @@ install_package() {
 # Verifies if package is installed
 verify_package_installed() {
     local package_name="$1"
-    dpkg -s "$package_name" >/dev/null 2>&1
-    if [ $? -ne 0 ]; then
+    if ! dpkg-query -W "$package_name" >/dev/null 2>&1; then
         echo "[ERROR] $package_name is not installed"
         exit 1
     else
