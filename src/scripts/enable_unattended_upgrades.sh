@@ -57,14 +57,6 @@ install_package unattended-upgrades
 # Verify unattended-upgrades was installed
 verify_package_installed unattended-upgrades
 
-# Check and configure unattended-upgrades config file
-if [ ! -f "$unattended_config_file" ]; then
-    echo "[ERROR] $unattended_config_file should have been created by the unattended-upgrades package"
-    exit 1
-fi
-
-echo "[INFO] Unattended-upgrades config file ($unattended_config_file) exists"
-
 # Enable automatic removal of unused dependencies and disable automatic reboot
 modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Remove-Unused-Dependencies' 'true'
 modify_config_file "$unattended_config_file" 'Unattended-Upgrade::Automatic-Reboot' 'false'
@@ -75,12 +67,6 @@ if [ ! -f "$auto_upgrades_file" ]; then
     echo "[INFO] Auto upgrades file ($auto_upgrades_file) does not exist. Creating it..."
     echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
     dpkg-reconfigure -f noninteractive unattended-upgrades
-
-    # Check if the file was created
-    if [ ! -f "$auto_upgrades_file" ]; then
-        echo "[ERROR] $auto_upgrades_file could not be created"
-        exit 1
-    fi
 fi
 
 # Enable automatic updates and unattended-upgrades (file should exist now)
