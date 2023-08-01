@@ -54,7 +54,7 @@ modify_config_file() {
 # Create apt.conf.d directory if it does not exist
 mkdir -p /etc/apt/apt.conf.d/
 
-# Install needed tools
+# Install tools if not installed
 install_package sed
 install_package coreutils
 
