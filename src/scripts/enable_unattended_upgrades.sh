@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Install Debian unattended-upgrades if not installed and enable it
 # Reference: https://wiki.debian.org/UnattendedUpgrades
 
@@ -18,6 +20,7 @@ Unattended-Upgrade::Allowed-Origins {\n\
 \"${distro_id}:${distro_codename}-security\";\n\
 \"${distro_id}ESMApps:${distro_codename}-apps-security\";\n\
 \"${distro_id}ESM:${distro_codename}-infra-security\";\n\
+\"Docker:${distro_codename}\";\n\
 };\n\
 \n\
 // Do not upgrade development release automatically\n\
