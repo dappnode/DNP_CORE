@@ -88,7 +88,7 @@ write_content_to_file() {
         exit 1
     fi
 
-    echo -e "$content" | tee "$file" >/dev/null
+    printf "%b" "$content" | tee "$file" >/dev/null
 
     if [ $? -eq 0 ]; then
         echo "[INFO] Modified $file"
