@@ -20,7 +20,6 @@ Unattended-Upgrade::Allowed-Origins {\n\
 \"${distro_id}:${distro_codename}-security\";\n\
 \"${distro_id}ESMApps:${distro_codename}-apps-security\";\n\
 \"${distro_id}ESM:${distro_codename}-infra-security\";\n\
-\"Docker:${distro_codename}\";\n\
 };\n\
 \n\
 // Do not upgrade development release automatically\n\
@@ -132,4 +131,4 @@ install_package apt-listchanges
 verify_package_installed apt-listchanges
 
 # Write the configuration content to the apt-listchanges.conf file
-echo -e "$listchanges_config" | tee "$listchanges_config_file" >/dev/null
+write_content_to_file "$listchanges_config" "$listchanges_config_file"
