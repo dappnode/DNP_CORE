@@ -16,10 +16,10 @@ save_seen=/var/lib/apt/listchanges.db"
 unattended_upgrades_config="
 // Automatically upgrade packages from these (origin:archive) pairs\n\
 Unattended-Upgrade::Allowed-Origins {\n\
-\"${distro_id}:${distro_codename}\";\n\
-\"${distro_id}:${distro_codename}-security\";\n\
-\"${distro_id}ESMApps:${distro_codename}-apps-security\";\n\
-\"${distro_id}ESM:${distro_codename}-infra-security\";\n\
+\"\${distro_id}:\${distro_codename}\";\n\
+\"\${distro_id}:\${distro_codename}-security\";\n\
+\"\${distro_id}ESMApps:\${distro_codename}-apps-security\";\n\
+\"\${distro_id}ESM:\${distro_codename}-infra-security\";\n\
 };\n\
 \n\
 // Do not upgrade development release automatically\n\
@@ -116,6 +116,7 @@ write_content_to_file "$unattended_upgrades_config" "$unattended_config_file"
 # Check and configure auto-upgrades config file
 if [ ! -f "$auto_upgrades_file" ]; then
     # Create the file as shown in https://wiki.debian.org/UnattendedUpgrades
+    # TODO: Test. It does not create the file if it has been manually deleted
     echo "[INFO] Auto upgrades file ($auto_upgrades_file) does not exist. Creating it..."
     echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
     dpkg-reconfigure -f noninteractive unattended-upgrades
