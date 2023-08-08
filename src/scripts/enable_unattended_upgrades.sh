@@ -58,7 +58,7 @@ APT::Periodic::Unattended-Upgrade \"1\";
 # Install package if not installed
 install_package() {
     local package_name="$1"
-    DEBIAN_FRONTEND=noninteractive apt-get update
+    apt-get update
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
