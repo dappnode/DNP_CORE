@@ -3,6 +3,8 @@
 # Install Debian unattended-upgrades if not installed and enable it
 # Reference: https://wiki.debian.org/UnattendedUpgrades
 
+needrestart_config_file="/etc/needrestart/needrestart.conf"
+
 unattended_config_file="/etc/apt/apt.conf.d/50unattended-upgrades"
 auto_upgrades_file="/etc/apt/apt.conf.d/20auto-upgrades"
 listchanges_config_file="/etc/apt/listchanges.conf"
@@ -58,7 +60,6 @@ APT::Periodic::Unattended-Upgrade \"1\";
 # Install package if not installed
 install_package() {
     local package_name="$1"
-    apt-get update
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
@@ -96,6 +97,23 @@ write_content_to_file() {
         echo "[INFO] $file was not modified"
     fi
 }
+
+# Make sure needrestart is installed and runs automatically to avoid user intervention
+
+# Update apt repositories
+apt-get update
+
+# Install or upgrade needrestart
+apt-get install -y needrestart
+
+# Use grep to check if the pattern exists in the file
+if grep -q "#\$nrconf{restart} = 'i';" "$needrestart_config_file"; then
+    # Use sed to perform the replacement
+    sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" "$needrestart_config_file"
+    echo "[INFO] needrestart modification complete."
+else
+    echo "[INFO] Pattern not found. No changes made in needrestart."
+fi
 
 # Create apt.conf.d directory if it does not exist
 mkdir -p /etc/apt/apt.conf.d/
