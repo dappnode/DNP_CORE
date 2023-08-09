@@ -62,7 +62,7 @@ install_package() {
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
-        apt-get install -y "$package_name"
+        DEBIAN_FRONTEND=noninteractive apt-get install -y "$package_name"
     else
         echo "[INFO] $package_name is already installed"
     fi
