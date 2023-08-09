@@ -106,6 +106,13 @@ apt-get update
 # Install or upgrade needrestart
 apt-get install -y needrestart
 
+# Create apt.conf.d directory if it does not exist
+mkdir -p /etc/apt/apt.conf.d/
+
+# Install tools if not installed
+install_package sed
+install_package coreutils
+
 # Use grep to check if the pattern exists in the file
 if grep -q "#\$nrconf{restart} = 'i';" "$needrestart_config_file"; then
     # Use sed to perform the replacement
@@ -114,13 +121,6 @@ if grep -q "#\$nrconf{restart} = 'i';" "$needrestart_config_file"; then
 else
     echo "[INFO] Pattern not found. No changes made in needrestart."
 fi
-
-# Create apt.conf.d directory if it does not exist
-mkdir -p /etc/apt/apt.conf.d/
-
-# Install tools if not installed
-install_package sed
-install_package coreutils
 
 # Install unattended-upgrades if not installed
 install_package unattended-upgrades
