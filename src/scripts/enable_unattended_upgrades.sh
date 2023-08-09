@@ -60,7 +60,6 @@ APT::Periodic::Unattended-Upgrade \"1\";
 # Install package if not installed
 install_package() {
     local package_name="$1"
-    apt-get update
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
@@ -101,24 +100,19 @@ write_content_to_file() {
 
 # Make sure needrestart is installed and runs automatically to avoid user intervention
 
-# Check if needrestart is installed
-if command -v needrestart &> /dev/null; then
-    # Update package repositories and the needrestart package
-    apt-get update
-    apt-get install --only-upgrade -y needrestart
-else
-    # If needrestart is not installed, install it
-    apt-get update
-    apt-get install -y needrestart
-fi
+# Update apt repositories
+apt-get update
+
+# Install or upgrade needrestart
+apt-get install -y needrestart
 
 # Use grep to check if the pattern exists in the file
 if grep -q "#\$nrconf{restart} = 'i';" "$needrestart_config_file"; then
     # Use sed to perform the replacement
     sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" "$needrestart_config_file"
-    echo "needrestart modification complete."
+    echo "[INFO] needrestart modification complete."
 else
-    echo "Pattern not found. No changes made in needrestart."
+    echo "[INFO] Pattern not found. No changes made in needrestart."
 fi
 
 # Create apt.conf.d directory if it does not exist
