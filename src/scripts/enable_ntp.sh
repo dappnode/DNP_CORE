@@ -5,7 +5,14 @@
 ## Reference:
 ##    https://wiki.debian.org/NTP
 
-# Install ntp package
+# If the clock is synchronized with NTP servers, the script will exit
+NTP_SYNCED=$(timedatectl show --property=NTPSynchronized --value)
+if [ "$NTP_SYNCED" = "yes" ]; then
+    echo "Clock is already synchronized with NTP servers."
+    exit 0
+fi
+
+# Install or update ntp package
 apt-get update
 apt-get install -y ntp
 
