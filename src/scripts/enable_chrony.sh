@@ -24,11 +24,15 @@ fi
 apt-get update
 apt-get install -y chrony
 
-# Enable on boot and restart chronyd service
-sudo systemctl enable chrony
-sudo systemctl restart chrony
-
-echo "Clock should now be synchronized with NTP servers using chrony."
+# Check if chrony is already syncing properly
+if ! chronyc tracking | grep -q "Leap status\s\+:\s\+Normal"; then
+    # Enable on boot and restart chronyd service only if not syncing properly
+    sudo systemctl enable chrony
+    sudo systemctl restart chrony
+    echo "Clock should now be synchronized with NTP servers using chrony."
+else
+    echo "Clock is already synchronized with NTP servers using chrony."
+fi
 
 # Set system clock to UTC. Maintaining the RTC in the local timezone is not fully supported and will create various problems
 # with time zone changes and daylight saving adjustments. Reference: https://manpages.debian.org/unstable/systemd/timedatectl.1.en.html
