@@ -8,16 +8,16 @@
 # Check if ntp is installed and remove it if it is
 if dpkg -l ntp | grep "^ii"; then
     echo "Stopping, disabling, and removing ntp package..."
-    sudo systemctl stop ntp
-    sudo systemctl disable ntp
-    sudo apt-get purge -y ntp
+    systemctl stop ntp
+    systemctl disable ntp
+    apt-get purge -y ntp
 fi
 
 # Check if systemd-timesyncd is active and disable it
 if systemctl is-active --quiet systemd-timesyncd; then
     echo "Stopping and disabling systemd-timesyncd..."
-    sudo systemctl stop systemd-timesyncd
-    sudo systemctl disable systemd-timesyncd
+    systemctl stop systemd-timesyncd
+    systemctl disable systemd-timesyncd
 fi
 
 # Install or update chrony package
@@ -27,8 +27,8 @@ apt-get install -y chrony
 # Check if chrony is already syncing properly
 if ! chronyc tracking | grep -q "Leap status\s\+:\s\+Normal"; then
     # Enable on boot and restart chronyd service only if not syncing properly
-    sudo systemctl enable chrony
-    sudo systemctl restart chrony
+    systemctl enable chrony
+    systemctl restart chrony
     echo "Clock should now be synchronized with NTP servers using chrony."
 else
     echo "Clock is already synchronized with NTP servers using chrony."
