@@ -5,13 +5,6 @@
 ## Reference:
 ##    https://chrony-project.org/
 
-# If the clock is synchronized with NTP servers using chrony, the script will exit
-TIME_SYNCED=$(timedatectl show --property=NTPSynchronized --value)
-if [ "$TIME_SYNCED" = "yes" ]; then
-    echo "Clock is already synchronized with NTP servers."
-    exit 0
-fi
-
 # Uninstall ntp
 apt-get purge -y ntp
 
