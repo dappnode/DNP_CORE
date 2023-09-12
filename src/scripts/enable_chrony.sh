@@ -5,8 +5,20 @@
 ## Reference:
 ##    https://chrony-project.org/
 
-# Uninstall ntp
-apt-get purge -y ntp
+# Check if ntp is installed and remove it if it is
+if dpkg -l ntp | grep "^ii"; then
+    echo "Stopping, disabling, and removing ntp package..."
+    sudo systemctl stop ntp
+    sudo systemctl disable ntp
+    sudo apt-get purge -y ntp
+fi
+
+# Check if systemd-timesyncd is active and disable it
+if systemctl is-active --quiet systemd-timesyncd; then
+    echo "Stopping and disabling systemd-timesyncd..."
+    sudo systemctl stop systemd-timesyncd
+    sudo systemctl disable systemd-timesyncd
+fi
 
 # Install or update chrony package
 apt-get update
