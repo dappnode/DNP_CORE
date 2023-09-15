@@ -2,7 +2,7 @@
 
 # Set environment variables to avoid interactive prompts
 export DEBIAN_FRONTEND=noninteractive
-DOCKER_DOWNLOAD_ORIGINS="Docker CE:stable"
+DOCKER_DOWNLOAD_ORIGINS="Docker:\${distro_codename}"
 UNATTENDED_UPGRADES_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
 
 # Upgrade from 0.2.77 to 0.2.78
