@@ -177,3 +177,5 @@ if [ -d /usr/src/dappnode/bin/docker/ ]; then
   log "Removing legacy docker download path /usr/src/dappnode/bin/docker/"
   rm -rf /usr/src/dappnode/bin/docker/
 fi
+
+exit 0
