@@ -91,7 +91,7 @@ if [ $? -ne 0 ]; then
 fi
 log "Download and install docker gpg key"
 curl -fL "${DOWNLOAD_GPG_URL}" |
-  gpg --dearmor -o /etc/apt/keyrings/docker.gpg 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
+  gpg --yes --dearmor -o /etc/apt/keyrings/docker.gpg 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
 if [ $? -ne 0 ]; then
   log "Failed to download and install docker gpg key."
   exit 1
