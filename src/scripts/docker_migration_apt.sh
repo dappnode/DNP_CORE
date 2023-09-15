@@ -2,6 +2,8 @@
 
 # Set environment variables to avoid interactive prompts
 export DEBIAN_FRONTEND=noninteractive
+DOCKER_DOWNLOAD_ORIGINS="Docker CE:stable"
+UNATTENDED_UPGRADES_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
 
 # Upgrade from 0.2.77 to 0.2.78
 
@@ -120,8 +122,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Install Docker Engine
-log "Install Docker Engine"
+
 # 1. Update the apt package index:
 log "Update the apt packages again"
 apt-get update 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
@@ -129,15 +130,26 @@ if [ $? -ne 0 ]; then
   log "Failed to update"
   exit 1
 fi
+# IMPORTANT: This step MUST be skipped so unattended-upgrades will upgrade docker later on
 # 2. Install Docker Engine, containerd, and Docker Compose.
-log "Install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
-if [ $? -ne 0 ]; then
-  log "Failed to install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin."
-  exit 1
-fi
+#log "Install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+#apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
+#if [ $? -ne 0 ]; then
+#  log "Failed to install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin."
+#  exit 1
+#fi
 # 3. Verify that the Docker Engine installation is successful by running the hello-world image.
 #docker run --rm hello-world && docker rmi hello-world
+
+# Add docker to unattended-upgrades
+log "Add docker to unattended-upgrades"
+# Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins 
+if [ -f "${UNATTENDED_UPGRADES_FILE}" ]; then
+  if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
+    log "Add docker download origins to unattended-upgrades"
+    sed -i "/Unattended-Upgrade::Allowed-Origins {/a \"${DOCKER_DOWNLOAD_ORIGINS}\";" "${UNATTENDED_UPGRADES_FILE}" 2>&1 | tee -a /usr/src/dappnode/logs/upgrade_014.log
+  fi
+fi
 
 # Check docker status and restart daemon if needed
 if ! systemctl is-active --quiet docker; then
