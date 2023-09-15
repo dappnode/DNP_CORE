@@ -14,6 +14,13 @@ log() {
 
 log "Starting docker install migration from pkg to apt"
 
+# Only update docker if unattended upgrades is enabled, 
+# otherwise the update might crash due to updating docker from docker.
+if [ ! -f /etc/apt/apt.conf.d/20auto-upgrades ]; then
+  log "Unattended upgrades is not enabled, skipping upgrade"
+  exit 0
+fi
+
 # Check if docker is installed via apt
 # The docker.list file is created by the docker installation script
 #if [  -f /etc/apt/sources.list.d/docker.list ]; then
