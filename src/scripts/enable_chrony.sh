@@ -19,11 +19,9 @@ if apt-get install -y chrony; then
     echo "Chrony installed successfully."
 
     # Check if systemd-timesyncd is active and disable it (should have been done by the chrony package install)
-    if systemctl is-active --quiet systemd-timesyncd; then
-        echo "Stopping and disabling systemd-timesyncd..."
-        systemctl stop systemd-timesyncd
-        systemctl disable systemd-timesyncd
-    fi
+    echo "Stopping and disabling systemd-timesyncd..."
+    systemctl stop systemd-timesyncd
+    systemctl disable systemd-timesyncd
 
     # Check if chrony is already syncing properly
     if ! chronyc tracking | grep -q "Leap status\s\+:\s\+Normal"; then
@@ -40,4 +38,5 @@ fi
 
 # Set system clock to UTC. Maintaining the RTC in the local timezone is not fully supported and will create various problems
 # with time zone changes and daylight saving adjustments. Reference: https://manpages.debian.org/unstable/systemd/timedatectl.1.en.html
+echo "Setting system clock to UTC..."
 timedatectl set-local-rtc 0
