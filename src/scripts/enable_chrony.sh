@@ -5,6 +5,8 @@
 ## Reference:
 ##    https://chrony-project.org/
 
+export DEBIAN_FRONTEND=noninteractive
+
 # Check if ntp is installed and remove it if so
 if dpkg -l ntp | grep "^ii"; then
     echo "Stopping, disabling, and removing ntp package..."
