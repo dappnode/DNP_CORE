@@ -10,6 +10,17 @@ log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a ${LOG_FILE}
 }
 
+add_docker_to_unattended_upgrades() {
+    # Add docker to unattended-upgrades
+    log "Add docker to unattended-upgrades"
+    
+    # Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins
+    if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
+        log "Add docker download origins to unattended-upgrades"
+        sed -i "/Unattended-Upgrade::Allowed-Origins {/a \"${DOCKER_DOWNLOAD_ORIGINS}\";" "${UNATTENDED_UPGRADES_FILE}" 2>&1 | tee -a ${LOG_FILE}
+    fi
+}
+
 log "Starting docker install migration from pkg to apt"
 
 # Only update docker if unattended upgrades is enabled,
@@ -23,7 +34,7 @@ fi
 # The docker.list file is created by the docker installation script
 if [ -f /etc/apt/sources.list.d/docker.list ]; then
   log "Docker is already installed via apt, skipping upgrade"
-  # TODO: check if docker is in unattended upgrades
+  add_docker_to_unattended_upgrades
   exit 0
 fi
 
@@ -138,12 +149,7 @@ fi
 #docker run --rm hello-world && docker rmi hello-world
 
 # Add docker to unattended-upgrades
-log "Add docker to unattended-upgrades"
-# Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins
-if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
-  log "Add docker download origins to unattended-upgrades"
-  sed -i "/Unattended-Upgrade::Allowed-Origins {/a \"${DOCKER_DOWNLOAD_ORIGINS}\";" "${UNATTENDED_UPGRADES_FILE}" 2>&1 | tee -a ${LOG_FILE}
-fi
+add_docker_to_unattended_upgrades
 
 # Add docker-compose alias of docker compose to the dappnode profile if is not already there and if docker compose is installed
 if [ -x "$(command -v docker-compose)" ]; then
