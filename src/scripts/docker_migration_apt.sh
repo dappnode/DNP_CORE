@@ -11,9 +11,6 @@ log() {
 }
 
 add_docker_to_unattended_upgrades() {
-    # Add docker to unattended-upgrades
-    log "Add docker to unattended-upgrades"
-    
     # Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins
     if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
         log "Add docker download origins to unattended-upgrades"
