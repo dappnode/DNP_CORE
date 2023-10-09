@@ -4,7 +4,7 @@
 export DEBIAN_FRONTEND=noninteractive
 DOCKER_DOWNLOAD_ORIGINS="Docker:\${distro_codename}"
 UNATTENDED_UPGRADES_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
-LOG_FILE="/usr/src/dappnode/logs/upgrade_015.log"
+LOG_FILE="/usr/src/dappnode/logs/upgrade_014.log"
 
 log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a ${LOG_FILE}
