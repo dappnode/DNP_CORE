@@ -81,7 +81,7 @@ log "OS: $OS ; Version: $VERSION ; Docker version: $DOCKER_VERSION"
 # Remove legacy docker packages
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
   log "Removing $pkg"
-  apt-get remove $pkg 2>&1 | tee -a ${LOG_FILE}
+  apt-get remove -y $pkg 2>&1 | tee -a ${LOG_FILE}
 done
 
 # Set up the repository
