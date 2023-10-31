@@ -7,15 +7,15 @@ UNATTENDED_UPGRADES_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
 LOG_FILE="/usr/src/dappnode/logs/upgrade_014.log"
 
 log() {
-  echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a ${LOG_FILE}
+  echo "$(date '+%Y-%m-%d %H:%M:%S') [upgrade_014]:  $1" | tee -a ${LOG_FILE}
 }
 
 add_docker_to_unattended_upgrades() {
-    # Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins
-    if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
-        log "Add docker download origins to unattended-upgrades"
-        sed -i "/Unattended-Upgrade::Allowed-Origins {/a \"${DOCKER_DOWNLOAD_ORIGINS}\";" "${UNATTENDED_UPGRADES_FILE}" 2>&1 | tee -a ${LOG_FILE}
-    fi
+  # Check that the UNATTENDED_upgrades_file exists if so, check that the file does not already contain the DOCKER_DOWNLOAD_ORIGINS, if not then modify it to include in the section Unattended-Upgrade::Allowed-Origins the docker download origins
+  if ! grep -q "${DOCKER_DOWNLOAD_ORIGINS}" "${UNATTENDED_UPGRADES_FILE}"; then
+    log "Add docker download origins to unattended-upgrades"
+    sed -i "/Unattended-Upgrade::Allowed-Origins {/a \"${DOCKER_DOWNLOAD_ORIGINS}\";" "${UNATTENDED_UPGRADES_FILE}" 2>&1 | tee -a ${LOG_FILE}
+  fi
 }
 
 log "Starting docker install migration from pkg to apt"
@@ -23,7 +23,7 @@ log "Starting docker install migration from pkg to apt"
 # Only update docker if unattended upgrades is enabled,
 # otherwise the update might crash due to updating docker from docker.
 if [ ! -f "${UNATTENDED_UPGRADES_FILE}" ]; then
-  log "WARNING: Unattended upgrades is not enabled, skipping upgrade"
+  log "WARNING: Unattended upgrades is not enabled, skipping..."
   exit 0
 fi
 
@@ -167,5 +167,7 @@ if [ -d /usr/src/dappnode/bin/docker/ ]; then
   log "Removing legacy docker download path /usr/src/dappnode/bin/docker/"
   rm -rf /usr/src/dappnode/bin/docker/
 fi
+
+log "Docker upgrade finished"
 
 exit 0
