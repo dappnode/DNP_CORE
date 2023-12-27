@@ -13,9 +13,7 @@ services:
       - "/etc:/etc"
       - "/usr/src/dappnode/:/usr/src/dappnode/"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    dns: 172.33.1.2
     networks:
       dncore_network:
-        ipv4_address: 172.33.1.11
         aliases:
           - core.dappnode
