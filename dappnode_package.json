@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.88",
+  "version": "0.3.0",
   "description": "DAppNode package responsible for managing the core packages",
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
@@ -21,9 +21,9 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "bind.dnp.dappnode.eth": "0.2.11",
+    "bind.dnp.dappnode.eth": "0.2.12",
     "ipfs.dnp.dappnode.eth": "0.2.22",
-    "dappmanager.dnp.dappnode.eth": "0.2.82",
+    "dappmanager.dnp.dappnode.eth": "0.2.83",
     "wifi.dnp.dappnode.eth": "0.2.9"
   },
   "runOrder": [
