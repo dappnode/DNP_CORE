@@ -19,13 +19,13 @@ on:
         required: true
       VPN_VERSION:
         description: "Version of VPN. Only numbers"
-        required: false
+        required: true
       WIREGUARD_VERSION:
         description: "Version of Wireguard. Only numbers"
-        required: false
+        required: true
       HTTPS_VERSION:
         description: "Version of HTTPS. Only numbers"
-        required: false
+        required: true
 
 env:
   CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
