@@ -26,6 +26,11 @@
     "dappmanager.dnp.dappnode.eth": "0.2.82",
     "wifi.dnp.dappnode.eth": "0.2.9"
   },
+  "optionalDependencies": {
+    "vpn.dnp.dappnode.eth": "0.2.10",
+    "wireguard.dnp.dappnode.eth": "0.1.3",
+    "https.dnp.dappnode.eth": "0.2.1"
+  },
   "runOrder": [
     "vpn.dnp.dappnode.eth",
     "core.dnp.dappnode.eth",
