@@ -135,13 +135,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 # IMPORTANT: This step MUST be skipped so unattended-upgrades will upgrade docker later on
+# MORE IMPORTANT: legacy docker-compose has as a dependency the older docker version
 # 2. Install Docker Engine, containerd, and Docker Compose.
-#log "Install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
-#apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y 2>&1 | tee -a ${LOG_FILE}
-#if [ $? -ne 0 ]; then
-#  log "Failed to install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin."
-#  exit 1
-#fi
+log "Install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y 2>&1 | tee -a ${LOG_FILE}
+if [ $? -ne 0 ]; then
+  log "Failed to install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin."
+  exit 1
+fi
 # 3. Verify that the Docker Engine installation is successful by running the hello-world image.
 #docker run --rm hello-world && docker rmi hello-world
 
