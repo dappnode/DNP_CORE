@@ -33,7 +33,4 @@
   ],
   "changelog": "",
   "updateAlerts": [],
-  "warnings": {
-    "onMinorUpdate": "Minor update to 0.3.0: this update will migrate the ip range from public to private of your dappnode software. You may loos eventually the connection to your dappnode. If so, please disconnect and connect back to your dappnode wifi or vpn. Contact dappnode discord support if you experience any issue with this update."
-  }
 }
