@@ -7,12 +7,12 @@ services:
   core.dnp.dappnode.eth:
     build: ./src
     restart: "no"
-    image: "core.dnp.dappnode.eth:0.2.93"
+    image: core.dnp.dappnode.eth:0.2.94
     container_name: DAppNodeCore-core.dnp.dappnode.eth
     volumes:
-      - "/etc:/etc"
-      - "/usr/src/dappnode/:/usr/src/dappnode/"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - /etc:/etc
+      - /usr/src/dappnode/:/usr/src/dappnode/
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       dncore_network:
         aliases:
