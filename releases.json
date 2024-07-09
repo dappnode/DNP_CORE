@@ -363,10 +363,10 @@
     "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.93&h=%2Fipfs%2FQmZCmRNeXBNtHxRpKQB3Uut7QswjcbS3y6BxEHeKPmuJYy"
   },
   "0.2.94": {
-    "hash": "/ipfs/QmTTNiByd78rBXjKfujLCPYfa8E8gufdji4T5xMnsZG3GY",
+    "hash": "/ipfs/QmYJP94KP1VZwV1gZT3CaaSHQLppGMgKqBkZkWaGcit1d2",
     "uploadedTo": {
-      "https://api.ipfs.dappnode.io": "Mon, 06 May 2024 09:00:40 GMT"
+      "https://api.ipfs.dappnode.io": "Tue, 09 Jul 2024 07:53:37 GMT"
     },
-    "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.94&h=%2Fipfs%2FQmTTNiByd78rBXjKfujLCPYfa8E8gufdji4T5xMnsZG3GY"
+    "link": "https://dappnode.github.io/sdk-publish/?r=core.dnp.dappnode.eth&v=0.2.94&h=%2Fipfs%2FQmYJP94KP1VZwV1gZT3CaaSHQLppGMgKqBkZkWaGcit1d2"
   }
 }
