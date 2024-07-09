@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.2.94",
+  "version": "0.2.95",
   "description": "DAppNode package responsible for managing the core packages",
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
@@ -23,7 +23,7 @@
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.11",
     "ipfs.dnp.dappnode.eth": "0.2.23",
-    "dappmanager.dnp.dappnode.eth": "0.2.88",
+    "dappmanager.dnp.dappnode.eth": "0.2.89",
     "wifi.dnp.dappnode.eth": "0.2.9"
   },
   "optionalDependencies": {
