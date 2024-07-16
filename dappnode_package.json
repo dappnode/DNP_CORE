@@ -28,8 +28,7 @@
   },
   "optionalDependencies": {
     "wireguard.dnp.dappnode.eth": "0.1.3",
-    "vpn.dnp.dappnode.eth": "0.2.10",
-    "https.dnp.dappnode.eth": "0.2.2"
+    "vpn.dnp.dappnode.eth": "0.2.10"
   },
   "runOrder": [
     "vpn.dnp.dappnode.eth",
