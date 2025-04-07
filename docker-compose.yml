@@ -7,7 +7,7 @@ services:
   core.dnp.dappnode.eth:
     build: ./src
     restart: "no"
-    image: core.dnp.dappnode.eth:0.2.104
+    image: core.dnp.dappnode.eth:0.2.105
     container_name: DAppNodeCore-core.dnp.dappnode.eth
     volumes:
       - /etc:/etc
