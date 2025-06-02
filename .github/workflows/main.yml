@@ -17,6 +17,9 @@ on:
       ipfs:
         description: "Version of the ipfs. Only numbers"
         required: true
+      notifications:
+        description: "Version of the notifications. Only numbers"
+        required: true
 
 env:
   CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
@@ -24,6 +27,7 @@ env:
   IPFS_VERSION: ${{ github.event.inputs.ipfs }}
   DAPPMANAGER_VERSION: ${{ github.event.inputs.dappmanager }}
   WIFI_VERSION: ${{ github.event.inputs.wifi }}
+  NOTIFICATIONS_VERSION: ${{ github.event.inputs.notifications }}
 
 jobs:
   release:
@@ -38,9 +42,9 @@ jobs:
       - name: Check versions regex
         run: |
           [[ $BIND_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
-          [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "versions introduced in wrong format"; exit 1; }
+          [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NOTIFICATIONS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "versions introduced in wrong format"; exit 1; }
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Edit the manifest with the new versions introduced
       - name: Set new versions
@@ -49,6 +53,7 @@ jobs:
           sed -i -e "/ipfs.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${IPFS_VERSION}"/" dappnode_package.json
           sed -i -e "/dappmanager.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${DAPPMANAGER_VERSION}"/" dappnode_package.json
           sed -i -e "/wifi.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIFI_VERSION}"/" dappnode_package.json
+          sed -i -e "/notifications.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${NOTIFICATIONS_VERSION}"/" dappnode_package.json
           cat dappnode_package.json
 
       - name: Setup node
