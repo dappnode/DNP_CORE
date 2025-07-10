@@ -21,7 +21,6 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "bind.dnp.dappnode.eth": "0.2.12",
     "ipfs.dnp.dappnode.eth": "0.2.26",
     "dappmanager.dnp.dappnode.eth": "0.2.104",
     "wifi.dnp.dappnode.eth": "0.2.9",
