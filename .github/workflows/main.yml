@@ -11,9 +11,6 @@ on:
       wifi:
         description: "Version of the wifi. Only numbers"
         required: true
-      bind:
-        description: "Version of the bind. Only numbers"
-        required: true
       ipfs:
         description: "Version of the ipfs. Only numbers"
         required: true
@@ -23,7 +20,6 @@ on:
 
 env:
   CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
-  BIND_VERSION: ${{ github.event.inputs.bind }}
   IPFS_VERSION: ${{ github.event.inputs.ipfs }}
   DAPPMANAGER_VERSION: ${{ github.event.inputs.dappmanager }}
   WIFI_VERSION: ${{ github.event.inputs.wifi }}
@@ -41,7 +37,7 @@ jobs:
           [[ "$CORE_BUMP_TYPE" == "major" ]] || { echo "Wrong input, it must be: patch | minor | major"; exit 1; }
       - name: Check versions regex
         run: |
-          [[ $BIND_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
+          [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
           [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NOTIFICATIONS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "versions introduced in wrong format"; exit 1; }
 
       - uses: actions/checkout@v4
@@ -49,7 +45,6 @@ jobs:
       # Edit the manifest with the new versions introduced
       - name: Set new versions
         run: |
-          sed -i -e "/bind.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${BIND_VERSION}"/"  dappnode_package.json
           sed -i -e "/ipfs.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${IPFS_VERSION}"/" dappnode_package.json
           sed -i -e "/dappmanager.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${DAPPMANAGER_VERSION}"/" dappnode_package.json
           sed -i -e "/wifi.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIFI_VERSION}"/" dappnode_package.json
