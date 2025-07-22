@@ -57,9 +57,9 @@ jobs:
           cat dappnode_package.json
 
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
       - name: Publish
         run: npx @dappnode/dappnodesdk publish ${CORE_BUMP_TYPE} --dappnode_team_preset
         env:
