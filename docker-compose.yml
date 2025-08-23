@@ -4,7 +4,7 @@ networks:
     name: dncore_network
     external: true
 services:
-  core.dnp.dappnode.eth:
+  core:
     build: ./src
     restart: "no"
     image: core.dnp.dappnode.eth:0.3.6
@@ -17,3 +17,4 @@ services:
       dncore_network:
         aliases:
           - core.dappnode
+          - core.core.dappnode
