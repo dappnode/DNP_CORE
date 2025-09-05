@@ -59,6 +59,7 @@ jobs:
           sed -i -e "/dappmanager.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${DAPPMANAGER_VERSION}"/" dappnode_package.json
           sed -i -e "/wifi.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIFI_VERSION}"/" dappnode_package.json
           sed -i -e "/notifications.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${NOTIFICATIONS_VERSION}"/" dappnode_package.json
+          sed -i -e "/premium.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${PREMIUM_VERSION}"/" dappnode_package.json
           cat dappnode_package.json
 
       - name: Setup node
