@@ -3,20 +3,24 @@ STATUS_CHECK_DELAY=1m
 CONTAINER_NAME=DAppNodeCore-dappmanager.dnp.dappnode.eth
 DAPPMANAGER_YML=/usr/src/dappnode/DNCORE/docker-compose-dappmanager.yml 
 
-# Copy upgrades
-mkdir -p /usr/src/dappnode/DNCORE/scripts/upgrade
-cp -rf ./scripts/* /usr/src/dappnode/DNCORE/scripts/upgrade
-chmod +x /usr/src/dappnode/DNCORE/scripts/upgrade/*.sh
-# Copy deb packages
-cp -fr ./deb /usr/src/dappnode/DNCORE/scripts/upgrade/
-# Copy hashes
-cp ./packages-content-hash.csv /usr/src/dappnode/DNCORE/packages-content-hash.csv
+if [[ "$DISABLE_HOST_SCRIPTS" == "true" ]]; then
+    echo "DISABLE_HOST_SCRIPTS is set to true, skipping host scripts copy and upgrades execution"
+else
+    # Copy upgrades
+    mkdir -p /usr/src/dappnode/DNCORE/scripts/upgrade
+    cp -rf ./scripts/* /usr/src/dappnode/DNCORE/scripts/upgrade
+    chmod +x /usr/src/dappnode/DNCORE/scripts/upgrade/*.sh
+    # Copy deb packages
+    cp -fr ./deb /usr/src/dappnode/DNCORE/scripts/upgrade/
+    # Copy hashes
+    cp ./packages-content-hash.csv /usr/src/dappnode/DNCORE/packages-content-hash.csv
 
-# Apply all local upgrades
-for filename in ./upgrades/upgrade_*.sh; do
-    echo "Applying upgrade ${filename}..."
-    sh "${filename}"
-done
+    # Apply all local upgrades
+    for filename in ./upgrades/upgrade_*.sh; do
+        echo "Applying upgrade ${filename}..."
+        sh "${filename}"
+    done
+fi
 
 sleep $STATUS_CHECK_DELAY
 
