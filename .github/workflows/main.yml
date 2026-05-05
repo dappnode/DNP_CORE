@@ -5,17 +5,12 @@ on:
       core:
         description: "Bump type, it must be: patch | minor | major"
         required: true
-      dappmanager:
-        description: "Version of the dappmanager. Only numbers"
-        required: true
-      wifi:
-        description: "Version of the wifi. Only numbers"
-        required: true
+      # Mandatory dependencies
       bind:
         description: "Version of the bind. Only numbers"
         required: true
-      ipfs:
-        description: "Version of the ipfs. Only numbers"
+      dappmanager:
+        description: "Version of the dappmanager. Only numbers"
         required: true
       notifications:
         description: "Version of the notifications. Only numbers"
@@ -23,15 +18,32 @@ on:
       premium:
         description: "Version of the premium. Only numbers"
         required: true
+      # Optional dependencies
+      ipfs:
+        description: "Version of the ipfs. Only numbers"
+        required: true
+      wifi:
+        description: "Version of the wifi. Only numbers"
+        required: true
+      wireguard:
+        description: "Version of the wireguard. Only numbers"
+        required: true
+      vpn:
+        description: "Version of the vpn. Only numbers"
+        required: true
 
 env:
   CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
+  # Mandatory dependencies
   BIND_VERSION: ${{ github.event.inputs.bind }}
-  IPFS_VERSION: ${{ github.event.inputs.ipfs }}
   DAPPMANAGER_VERSION: ${{ github.event.inputs.dappmanager }}
-  WIFI_VERSION: ${{ github.event.inputs.wifi }}
   NOTIFICATIONS_VERSION: ${{ github.event.inputs.notifications }}
   PREMIUM_VERSION: ${{ github.event.inputs.premium }}
+  # Optional dependencies
+  IPFS_VERSION: ${{ github.event.inputs.ipfs }}
+  WIFI_VERSION: ${{ github.event.inputs.wifi }}
+  WIREGUARD_VERSION: ${{ github.event.inputs.wireguard }}
+  VPN_VERSION: ${{ github.event.inputs.vpn }}
 
 jobs:
   release:
@@ -46,7 +58,8 @@ jobs:
       - name: Check versions regex
         run: |
           [[ $BIND_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
-          [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NOTIFICATIONS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $PREMIUM_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+          [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NOTIFICATIONS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $PREMIUM_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
+          [[ $WIREGUARD_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $VPN_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
           { echo "versions introduced in wrong format"; exit 1; }
 
       - uses: actions/checkout@v4
@@ -60,6 +73,8 @@ jobs:
           sed -i -e "/wifi.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIFI_VERSION}"/" dappnode_package.json
           sed -i -e "/notifications.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${NOTIFICATIONS_VERSION}"/" dappnode_package.json
           sed -i -e "/premium.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${PREMIUM_VERSION}"/" dappnode_package.json
+          sed -i -e "/wireguard.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIREGUARD_VERSION}"/" dappnode_package.json
+          sed -i -e "/vpn.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${VPN_VERSION}"/" dappnode_package.json
           cat dappnode_package.json
 
       - name: Setup node
