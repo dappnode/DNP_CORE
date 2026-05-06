@@ -1,6 +1,6 @@
 {
   "name": "core.dnp.dappnode.eth",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "description": "DAppNode package responsible for managing the core packages",
   "type": "dncore",
   "architectures": ["linux/amd64", "linux/arm64"],
@@ -22,7 +22,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "bind.dnp.dappnode.eth": "0.2.13",
-    "dappmanager.dnp.dappnode.eth": "0.2.122",
+    "dappmanager.dnp.dappnode.eth": "0.2.123",
     "notifications.dnp.dappnode.eth": "0.1.9",
     "premium.dnp.dappnode.eth": "0.1.1"
   },
