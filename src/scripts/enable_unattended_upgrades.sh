@@ -15,15 +15,8 @@ which=news\n\
 confirm=false\n\
 save_seen=/var/lib/apt/listchanges.db"
 
-unattended_upgrades_config="
-// Automatically upgrade packages from these (origin:archive) pairs\n\
-Unattended-Upgrade::Allowed-Origins {\n\
-\"\${distro_id}:\${distro_codename}\";\n\
-\"\${distro_id}:\${distro_codename}-security\";\n\
-\"\${distro_id}ESMApps:\${distro_codename}-apps-security\";\n\
-\"\${distro_id}ESM:\${distro_codename}-infra-security\";\n\
-};\n\
-\n\
+unattended_upgrades_config=""
+unattended_upgrades_options="
 // Do not upgrade development release automatically\n\
 Unattended-Upgrade::DevRelease "false";\n\
 \n\
@@ -50,6 +43,27 @@ Unattended-Upgrade::Automatic-Reboot "false";\n\
 \n\
 // Non-verbose logging\n\
 Unattended-Upgrade::Verbose "false";\n\
+"
+
+debian_unattended_upgrades_origins="
+// Automatically upgrade Debian packages from the installed release codename\n\
+Unattended-Upgrade::Origins-Pattern {\n\
+\"origin=Debian,codename=\${distro_codename},label=Debian\";\n\
+\"origin=Debian,codename=\${distro_codename},label=Debian-Security\";\n\
+\"origin=Debian,codename=\${distro_codename}-security,label=Debian-Security\";\n\
+};\n\
+\n\
+"
+
+ubuntu_unattended_upgrades_origins="
+// Automatically upgrade Ubuntu packages from the installed release archive\n\
+Unattended-Upgrade::Origins-Pattern {\n\
+\"origin=Ubuntu,archive=\${distro_codename},label=Ubuntu\";\n\
+\"origin=Ubuntu,archive=\${distro_codename}-security,label=Ubuntu\";\n\
+\"origin=UbuntuESMApps,archive=\${distro_codename}-apps-security,label=UbuntuESMApps\";\n\
+\"origin=UbuntuESM,archive=\${distro_codename}-infra-security,label=UbuntuESM\";\n\
+};\n\
+\n\
 "
 
 auto_upgrades_config="
@@ -98,6 +112,30 @@ write_content_to_file() {
     fi
 }
 
+set_unattended_upgrades_config_for_distro() {
+    ID=""
+
+    if [ -r /etc/os-release ]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+    fi
+
+    echo "[INFO] Detected distro ID: ${ID:-unknown}"
+
+    case "$ID" in
+        debian)
+            unattended_upgrades_config="${debian_unattended_upgrades_origins}${unattended_upgrades_options}"
+            ;;
+        ubuntu)
+            unattended_upgrades_config="${ubuntu_unattended_upgrades_origins}${unattended_upgrades_options}"
+            ;;
+        *)
+            echo "[WARN] Unsupported or unknown distro ID: ${ID:-unknown}. Leaving ${unattended_config_file} unchanged."
+            return 1
+            ;;
+    esac
+}
+
 # Make sure needrestart is installed and runs automatically to avoid user intervention
 
 # Update apt repositories
@@ -129,7 +167,9 @@ install_package unattended-upgrades
 verify_package_installed unattended-upgrades
 
 # Set custom config for unattended-upgrades
-write_content_to_file "$unattended_upgrades_config" "$unattended_config_file"
+if set_unattended_upgrades_config_for_distro; then
+    write_content_to_file "$unattended_upgrades_config" "$unattended_config_file"
+fi
 
 # Check and configure auto-upgrades config file
 if [ ! -f "$auto_upgrades_file" ]; then
