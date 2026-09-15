@@ -31,6 +31,9 @@ on:
       vpn:
         description: "Version of the vpn. Only numbers"
         required: true
+      nexus_proofs:
+        description: "Version of the nexus-proofs. Only numbers"
+        required: true
 
 env:
   CORE_BUMP_TYPE: ${{ github.event.inputs.core }}
@@ -44,6 +47,7 @@ env:
   WIFI_VERSION: ${{ github.event.inputs.wifi }}
   WIREGUARD_VERSION: ${{ github.event.inputs.wireguard }}
   VPN_VERSION: ${{ github.event.inputs.vpn }}
+  NEXUS_PROOFS_VERSION: ${{ github.event.inputs.nexus_proofs }}
 
 jobs:
   release:
@@ -59,7 +63,7 @@ jobs:
         run: |
           [[ $BIND_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $IPFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $DAPPMANAGER_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
           [[ $WIFI_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NOTIFICATIONS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $PREMIUM_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && \
-          [[ $WIREGUARD_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $VPN_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+          [[ $WIREGUARD_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $VPN_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && [[ $NEXUS_PROOFS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
           { echo "versions introduced in wrong format"; exit 1; }
 
       - uses: actions/checkout@v4
@@ -75,6 +79,7 @@ jobs:
           sed -i -e "/premium.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${PREMIUM_VERSION}"/" dappnode_package.json
           sed -i -e "/wireguard.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${WIREGUARD_VERSION}"/" dappnode_package.json
           sed -i -e "/vpn.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${VPN_VERSION}"/" dappnode_package.json
+          sed -i -e "/nexus-proofs.dnp.dappnode.eth/s/[0-9]*\.[0-9]*\.[0-9]*/"${NEXUS_PROOFS_VERSION}"/" dappnode_package.json
           cat dappnode_package.json
 
       - name: Setup node
