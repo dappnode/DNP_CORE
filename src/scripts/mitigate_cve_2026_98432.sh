@@ -22,7 +22,7 @@ write_status() {
 check_rules() {
     local chain key value
     for chain in PREROUTING OUTPUT; do
-        iptables -w 5 -t raw -C "$chain" "${rule[@]}" 2>/dev/null || return 1
+        iptables -w 5 -t raw -C "$chain" "${rule[@]}" >/dev/null 2>&1 || return 1
     done
     for key in "${keys[@]}"; do
         if value=$(sysctl -n "$key" 2>/dev/null); then
@@ -63,7 +63,7 @@ apply() {
     # PREROUTING covers host INPUT and normal Docker bridge/DNAT forwarding.
     # OUTPUT also covers host-originated traffic and loopback. Never flush rules.
     for chain in PREROUTING OUTPUT; do
-        if ! iptables -w 5 -t raw -C "$chain" "${rule[@]}" 2>/dev/null; then
+        if ! iptables -w 5 -t raw -C "$chain" "${rule[@]}" >/dev/null 2>&1; then
             iptables -w 5 -t raw -I "$chain" 1 "${rule[@]}"
         fi
     done
@@ -128,7 +128,7 @@ remove() {
     for chain in PREROUTING OUTPUT; do
         # Check table access separately: a missing rule is OK, permission errors aren't.
         iptables -w 5 -t raw -S "$chain" >/dev/null
-        while iptables -w 5 -t raw -C "$chain" "${rule[@]}" 2>/dev/null; do
+        while iptables -w 5 -t raw -C "$chain" "${rule[@]}" >/dev/null 2>&1; do
             iptables -w 5 -t raw -D "$chain" "${rule[@]}"
         done
     done
