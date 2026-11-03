@@ -2,6 +2,7 @@
 STATUS_CHECK_DELAY=1m
 CONTAINER_NAME=DAppNodeCore-dappmanager.dnp.dappnode.eth
 DAPPMANAGER_YML=/usr/src/dappnode/DNCORE/docker-compose-dappmanager.yml 
+upgrades_failed=0
 
 if [[ "$DISABLE_HOST_SCRIPTS" == "true" ]]; then
     echo "DISABLE_HOST_SCRIPTS is set to true, skipping host scripts copy and upgrades execution"
@@ -18,7 +19,10 @@ else
     # Apply all local upgrades
     for filename in ./upgrades/upgrade_*.sh; do
         echo "Applying upgrade ${filename}..."
-        sh "${filename}"
+        if ! sh "${filename}"; then
+            echo "ERROR: upgrade ${filename} failed" >&2
+            upgrades_failed=1
+        fi
     done
 fi
 
@@ -41,3 +45,6 @@ elif [[ $RUNNING_IMAGE != $YML_IMAGE ]];then
             docker-compose -f $DAPPMANAGER_YML up -d <&-
     fi
 fi
+
+# Restore DappManager above even if a host migration failed, then expose failure.
+exit "$upgrades_failed"
