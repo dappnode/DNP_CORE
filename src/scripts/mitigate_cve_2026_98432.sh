@@ -51,7 +51,7 @@ status() {
 apply() {
     [[ ! -f "$state_dir/removed" ]] || return 0
     local key value chain
-    # Record original values once. Repeated boot/timer runs never replace them.
+    # Record original values once. Repeated applications never replace them.
     for key in "${keys[@]}"; do
         if value=$(sysctl -n "$key" 2>/dev/null); then
             [[ "$value" == 0 || "$value" == 1 ]]
@@ -82,6 +82,11 @@ install() {
     if [[ ${ID:-} != ubuntu ]]; then write_status not-applicable; return 0; fi
     command -v iptables >/dev/null
     command -v sysctl >/dev/null
+    # Remove the periodic checker if an earlier draft was installed on a canary.
+    if [[ -f "$unit_dir/$unit.timer" ]]; then
+        systemctl disable --now "$unit.timer"
+        rm -f "$unit_dir/$unit.timer"
+    fi
     # Make rollback available before applying any network changes.
     mkdir -p "$(dirname "$script_path")"
     if [[ $(readlink -f "$0") != "$script_path" ]]; then command install -m 755 "$0" "$script_path"; fi
@@ -103,28 +108,14 @@ Conflicts=shutdown.target
 
 [Service]
 Type=oneshot
+RemainAfterExit=yes
 ExecStart=/bin/bash $script_path apply
 
 [Install]
 WantedBy=multi-user.target
 UNIT
-    cat > "$unit_dir/$unit.timer" <<UNIT
-[Unit]
-Description=Recheck Dappnode CVE-2026-98432 temporary mitigation
-
-[Timer]
-OnBootSec=1min
-OnUnitActiveSec=1min
-Unit=$unit.service
-
-[Install]
-WantedBy=timers.target
-UNIT
     systemctl daemon-reload
-    systemctl enable "$unit.service" "$unit.timer"
-    # apply already ran synchronously; release the lock before the timer can fire.
-    flock -u 9
-    systemctl start "$unit.timer"
+    systemctl enable "$unit.service"
     echo 'Temporary mitigation installed. The host still needs an official kernel fix.'
 }
 
