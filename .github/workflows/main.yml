@@ -85,7 +85,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: "20.x"
+          node-version: "24.22.3"
       - name: Publish
         run: npx @dappnode/dappnodesdk publish ${CORE_BUMP_TYPE} --dappnode_team_preset
         env:
