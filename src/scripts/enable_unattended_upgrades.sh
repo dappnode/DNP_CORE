@@ -71,13 +71,21 @@ APT::Periodic::Update-Package-Lists \"1\";
 APT::Periodic::Unattended-Upgrade \"1\";
 "
 
+# Run apt-get without prompts, without needrestart restarting services, and
+# without waiting forever for the dpkg lock. This script runs on the host with
+# a TTY but no input (docker run -t), so any prompt blocks every later core
+# upgrade until the host reboots.
+apt_get_noninteractive() {
+    DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt-get -o DPkg::Lock::Timeout=300 "$@"
+}
+
 # Install package if not installed
 install_package() {
     local package_name="$1"
     dpkg -s "$package_name" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INFO] Installing $package_name..."
-        DEBIAN_FRONTEND=noninteractive apt-get install -y "$package_name"
+        apt_get_noninteractive install -y "$package_name"
     else
         echo "[INFO] $package_name is already installed"
     fi
@@ -139,10 +147,10 @@ set_unattended_upgrades_config_for_distro() {
 # Make sure needrestart is installed and runs automatically to avoid user intervention
 
 # Update apt repositories
-apt-get update
+apt_get_noninteractive update
 
 # Install or upgrade needrestart
-apt-get install -y needrestart
+apt_get_noninteractive install -y needrestart
 
 # Create apt.conf.d directory if it does not exist
 mkdir -p /etc/apt/apt.conf.d/

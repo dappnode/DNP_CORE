@@ -18,8 +18,9 @@ fi
 source /etc/os-release
 
 if [ "$ID" == "ubuntu" ] || [ "$ID" == "debian" ]; then
-    DEBIAN_FRONTEND=noninteractive apt update -y
-    DEBIAN_FRONTEND=noninteractive apt install -y "${USBMOUNT_PATH}"
+    # No prompts, no needrestart service restarts, and a bounded wait for the dpkg lock
+    DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt -o DPkg::Lock::Timeout=300 update -y
+    DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt -o DPkg::Lock::Timeout=300 install -y "${USBMOUNT_PATH}"
 else
     echo "Distribution not supported, exiting."
     exit 1
